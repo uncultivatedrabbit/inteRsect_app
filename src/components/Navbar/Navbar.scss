@@ -1,0 +1,17 @@
+.Navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .Nav__Links {
+    display: flex;
+    padding: 0 1em;
+
+    * {
+      padding: 0 0.5em;
+    }
+  }
+  #Nav__Logo {
+    padding: 0 1em;
+  }
+}

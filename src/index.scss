@@ -1,0 +1,26 @@
+@import "./utils/variables.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $mainFont;
+  font-size: 20px;
+  color: $mainDark;
+  background-color: $mainWhite;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $headerFont;
+}
+
+a {
+  text-decoration: none;
+  color: $mainDark;
+  display: block;
+}

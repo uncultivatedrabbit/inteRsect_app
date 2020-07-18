@@ -1,0 +1,46 @@
+@import "../../utils/variables.scss";
+
+.Registration__Header {
+  padding: 3em 5em;
+
+  .Registration__Logo {
+    text-align: center;
+    font-size: 4rem;
+    font-family: $headerFont;
+  }
+}
+
+.Reg__Form {
+  @include basic-flex;
+
+  input {
+    width: 70vw;
+    margin-bottom: 1em;
+    border: none;
+  }
+
+  .Input__Container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid grey;
+  }
+
+  #Reg__Submit {
+    padding: 1.5em;
+  }
+}
+
+.Redirect__To__Login {
+  @include basic-flex;
+
+  #Login__Redirect {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: $mainDark;
+    margin-bottom: 1em;
+    font-family: $mainFont;
+  }
+}

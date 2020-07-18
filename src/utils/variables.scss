@@ -1,0 +1,13 @@
+$mainWhite: #fff;
+$mainDark: rgb(27, 26, 29);
+$mainBlue: rgb(34, 82, 255);
+$mainGreen: rgb(6, 208, 189);
+$mainFont: "Titillium Web", Sans-Serif;
+$headerFont: "Dosis", Sans-Serif;
+
+@mixin basic-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
