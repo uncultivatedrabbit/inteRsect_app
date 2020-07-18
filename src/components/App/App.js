@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import "./App.css";
 import Registration from "../../pages/Registration/Registration";
 import LandingPage from "../../pages/LandingPage/LandingPage";
 import Login from "../../pages/Login/Login";

@@ -1,4 +1,4 @@
-@import "./utils/variables.scss";
+@import "./utils/scss/variables.scss";
 
 body {
   margin: 0;
@@ -23,4 +23,8 @@ a {
   text-decoration: none;
   color: $mainDark;
   display: block;
+}
+
+ul{
+  list-style-type: none;
 }
