@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Project from "../../components/Project/Project";
 import "./UserAccount.scss";
 
 import Navbar from "../../components/Navbar/Navbar";
@@ -49,16 +51,9 @@ export default class UserAccount extends Component {
           <section className="Projects__Container">
             <h2>Projects</h2>
             <div className="Projects">
-              <div className="Project__Model">
-                <h3>Super Important Medical Research </h3>
-                <p>Topics </p>
-                <ul>
-                  <li>Family Medicine</li>
-                  <li>General Surgery</li>
-                </ul>
-              </div>
+              <Project />
             </div>
-            <button type="submit">Create Project</button>
+            <Link to="/addProject">Add New Project</Link>
           </section>
         </div>
       </>
