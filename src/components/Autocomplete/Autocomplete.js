@@ -109,7 +109,6 @@ export default class Autocomplete extends Component {
       onClick,
       onKeyDown,
       state: {
-        activeSuggestion,
         filteredSuggestions,
         showSuggestions,
         userInput,

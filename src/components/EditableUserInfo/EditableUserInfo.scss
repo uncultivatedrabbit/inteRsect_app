@@ -1,0 +1,25 @@
+@import "../../utils/scss/variables.scss";
+
+.Editable {
+  display: flex;
+  align-items: center;
+
+  p {
+    padding: 1px 2px;
+  }
+
+  i {
+    margin-left: 1em;
+    cursor: pointer;
+  }
+  .fa-pencil-alt {
+    font-size: 0.8rem;
+  }
+  input {
+    border: none;
+    font-size: 20px;
+    margin: 1em 0;
+    font-family: $mainFont;
+    width: 100%;
+  }
+}
