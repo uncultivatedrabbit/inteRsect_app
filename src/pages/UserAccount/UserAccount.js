@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Project from "../../components/Project/Project";
 import "./UserAccount.scss";
 import EditableUserInfo from "../../components/EditableUserInfo/EditableUserInfo";
-
 import Navbar from "../../components/Navbar/Navbar";
 
 export default class UserAccount extends Component {
@@ -20,7 +19,7 @@ export default class UserAccount extends Component {
     const { email, status, school, specialties, biography } = this.state;
     return (
       <>
-        <Navbar />
+        <Navbar loggedIn={true}/>
         <div className="User__Account">
           <section className="Profile__Header__Container">
             <h1 id="User__Logo">H</h1>

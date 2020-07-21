@@ -14,7 +14,7 @@ export default class SearchPage extends Component {
   render() {
     return (
       <>
-        <Navbar />
+        <Navbar loggedIn={true}/>
         <div className="SearchPage">
           <h1>Search page</h1>
           <section className="Search__Sidebar">

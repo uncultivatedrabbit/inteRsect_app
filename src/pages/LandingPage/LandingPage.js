@@ -7,7 +7,7 @@ export default class LandingPage extends Component {
   render() {
     return (
       <>
-        <Navbar />
+        <Navbar loggedIn={false} />
         <div className="Landing__Page">
           <section className="Landing__Hero">
             <h2>Your personal hub for medical research</h2>
