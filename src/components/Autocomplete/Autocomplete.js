@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import SearchService from "../../services/search-service";
 
 export default class Autocomplete extends Component {
   static propTypes = {
@@ -58,6 +59,7 @@ export default class Autocomplete extends Component {
           })
           .flat(Infinity)
           .filter((s) => s !== null)
+          .map((word) => word.toLowerCase())
       ),
     ];
     const filteredSuggestions = flattenedSuggestions.filter(
@@ -74,11 +76,13 @@ export default class Autocomplete extends Component {
   };
 
   onClick = (e) => {
+    const searchTerm = e.currentTarget.innerText;
+    SearchService.searchDbForMatches(searchTerm);
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      userInput: e.currentTarget.innerText,
+      userInput: searchTerm,
     });
   };
 
@@ -108,17 +112,14 @@ export default class Autocomplete extends Component {
       onChange,
       onClick,
       onKeyDown,
-      state: {
-        filteredSuggestions,
-        showSuggestions,
-        userInput,
-      },
+      state: { filteredSuggestions, showSuggestions, userInput },
     } = this;
 
     return (
       <>
         <input
           type="text"
+          id="search_term"
           onChange={onChange}
           onKeyDown={onKeyDown}
           value={userInput}

@@ -3,8 +3,14 @@ import MedicalSpecialties from "../../utils/js/MedicalSpecialties/MedialSpecialt
 import Navbar from "../../components/Navbar/Navbar";
 import "./SearchPage.scss";
 import Autocomplete from "../../components/Autocomplete/Autocomplete";
+import SearchService from "../../services/search-service";
 
 export default class SearchPage extends Component {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { search_term } = e.target;
+    SearchService.searchDbForMatches(search_term.value);
+  };
   render() {
     return (
       <>
@@ -14,9 +20,9 @@ export default class SearchPage extends Component {
           <section className="Search__Sidebar">
             <h2>Filter by speciality</h2>
           </section>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <label htmlFor="Search__Bar"></label>
-            <Autocomplete suggestions={MedicalSpecialties}/>
+            <Autocomplete suggestions={MedicalSpecialties} />
             <input type="submit" value="Search" />
           </form>
         </div>

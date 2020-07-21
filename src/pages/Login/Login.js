@@ -1,16 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import ApiAuthService from "../../services/auth-api-service";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./Login.scss";
 
-
 export default class Login extends Component {
+  state = { error: null };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ error: null });
+    const { email, password } = e.target;
+    ApiAuthService.postLogin({ email: email.value, password: password.value });
+    this.props.history.push("/userAccount/:id")
+  };
   render() {
+    const { error } = this.state;
     return (
       <>
         <header className="Login__Header">
-          <Link to="/" className="Login__Logo">inteRsect</Link>
+          <Link to="/" className="Login__Logo">
+            inteRsect
+          </Link>
         </header>
-        <form className="Login__Form">
+        <form className="Login__Form" onSubmit={this.handleSubmit}>
+          {/* display errors to the UI */}
+          <div role="alert">{error && <ErrorMessage error={error} />}</div>
           <div className="Input__Container">
             <label htmlFor="Login__Email">
               Email <i className="far fa-envelope"></i>

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import VerificationService from "../../services/verification";
+import VerificationService from "../../services/verification-service";
 import AuthApiService from "../../services/auth-api-service";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./Registration.scss";
 
 export default class Registration extends Component {
@@ -10,16 +11,26 @@ export default class Registration extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { full_name, email, password, verification } = e.target;
-    const passwordVerified = VerificationService.verifyPasswordsMatch(
+    // verify that the passwords match before submitting to the server
+    const passwordsMatch = VerificationService.verifyPasswordsMatch(
       password.value,
       verification.value
     );
-    if (passwordVerified) {
+    // if the credentials are okay begin POST request
+    if (passwordsMatch) {
       AuthApiService.postUser({
         full_name: full_name.value,
         password: password.value,
         email: email.value,
       });
+
+      full_name.value = "";
+      password.value = "";
+      email.value = "";
+      // add something to let the login page know the registration was successful
+      
+      this.props.history.push("/login");
+
       this.setState({ error: null });
     } else {
       this.setState({ error: "Passwords don't match" });
@@ -36,9 +47,8 @@ export default class Registration extends Component {
           </Link>
         </header>
         <form className="Reg__Form" onSubmit={this.handleSubmit}>
-          <div role="alert">
-            {error && <p className="Error__Msg">{error}</p>}
-          </div>
+          {/* display errors to the UI */}
+          <div role="alert">{error && <ErrorMessage error={error} />}</div>
           <div className="Input__Container">
             <label htmlFor="Reg__Full__Name">
               Full Name <i className="far fa-user-circle"></i>

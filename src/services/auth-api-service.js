@@ -4,7 +4,9 @@ const AuthApiService = {
   postUser(user) {
     console.log(user);
   },
-  postLogin(credentials) {},
+  postLogin(credentials) {
+    console.log(credentials);
+  },
   postRefreshToken() {},
 };
 
