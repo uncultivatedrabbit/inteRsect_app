@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import PropTypes from "prop-types";
+import { slide as Menu } from "react-burger-menu";
 
 export default function Navbar(props) {
   const loggedIn = props.loggedIn;

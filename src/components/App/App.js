@@ -6,6 +6,7 @@ import Login from "../../pages/Login/Login";
 import UserAccount from "../../pages/UserAccount/UserAccount";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import SearchPage from "../../pages/SearchPage/SearchPage";
+import ProjectPage from '../../pages/ProjectPage/ProjectPage'
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path="/register" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/search" component={SearchPage} />
+          <Route path="/project/:id" component={ProjectPage} />
           <Route component={ErrorPage} />
         </Switch>
       </main>

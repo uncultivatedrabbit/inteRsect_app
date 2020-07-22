@@ -25,6 +25,16 @@ a {
   display: block;
 }
 
-ul{
+ul {
   list-style-type: none;
 }
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: $mainHoverGreen;
+}
+
+input:focus {
+  outline-color: $mainGreen;
+}
+

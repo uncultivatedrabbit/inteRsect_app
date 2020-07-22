@@ -19,16 +19,18 @@
     border: none;
   }
 
+  input[type="submit"] {
+    @include button;
+  }
+  input[type="submit"]:hover{
+    background: $mainHoverGreen;
+  }
+ 
   .Input__Container {
     display: flex;
     flex-direction: column;
-    padding: 1em;
     margin-bottom: 1em;
-    border-bottom: 1px solid grey;
-  }
-
-  #Login__Submit {
-    padding: 1.5em;
+    border-bottom: 1px solid $mainGreen;
   }
 }
 
@@ -36,11 +38,6 @@
   @include basic-flex;
 
   #Reg__Redirect {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: $mainDark;
-    margin-bottom: 1em;
-    font-family: $mainFont;
+    @include redirect;
   }
 }

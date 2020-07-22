@@ -2,6 +2,7 @@ $mainWhite: #fff;
 $mainDark: rgb(27, 26, 29);
 $mainBlue: rgb(34, 82, 255);
 $mainGreen: rgb(6, 208, 189);
+$mainHoverGreen:rgba(0, 139, 125, 0.76);
 $mainFont: "Titillium Web", Sans-Serif;
 $headerFont: "Dosis", Sans-Serif;
 
@@ -11,3 +12,23 @@ $headerFont: "Dosis", Sans-Serif;
   align-items: center;
 }
 
+@mixin button {
+  background-color: $mainGreen;
+  color: $mainWhite;
+  font-family: $mainFont;
+  font-size: 20px;
+  padding: 0.5em;
+  letter-spacing: 2px;
+  border-radius: 5px;
+}
+
+@mixin redirect {
+  background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: $mainGreen;
+    margin-bottom: 1em;
+    font-family: $mainFont;
+    font-weight: 700;
+    
+}
