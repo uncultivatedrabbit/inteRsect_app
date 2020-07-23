@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import SearchService from "../../services/search-service";
+import ProjectService from "../../services/project-api-service";
 
 export default class Autocomplete extends Component {
   static propTypes = {
@@ -77,7 +77,7 @@ export default class Autocomplete extends Component {
 
   onClick = (e) => {
     const searchTerm = e.currentTarget.innerText;
-    SearchService.searchDbForMatches(searchTerm);
+    ProjectService.getProjectsByTopic(searchTerm);
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],

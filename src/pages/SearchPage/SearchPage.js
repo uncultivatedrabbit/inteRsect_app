@@ -3,18 +3,18 @@ import MedicalSpecialties from "../../utils/js/MedicalSpecialties/MedialSpecialt
 import Navbar from "../../components/Navbar/Navbar";
 import "./SearchPage.scss";
 import Autocomplete from "../../components/Autocomplete/Autocomplete";
-import SearchService from "../../services/search-service";
+import ProjectService from '../../services/project-api-service'
 
 export default class SearchPage extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { search_term } = e.target;
-    SearchService.searchDbForMatches(search_term.value);
+    ProjectService.getProjectsByTopic(search_term.value);
   };
   render() {
     return (
       <>
-        <Navbar loggedIn={true}/>
+        <Navbar/>
         <div className="SearchPage">
           <h1>Search page</h1>
           <section className="Search__Sidebar">

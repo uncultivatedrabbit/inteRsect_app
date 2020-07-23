@@ -6,22 +6,37 @@ import Login from "../../pages/Login/Login";
 import UserAccount from "../../pages/UserAccount/UserAccount";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import SearchPage from "../../pages/SearchPage/SearchPage";
-import ProjectPage from '../../pages/ProjectPage/ProjectPage'
+import ProjectPage from "../../pages/ProjectPage/ProjectPage";
+import Context from "../../Context";
+import AddProjectPage from "../../pages/AddProjectPage/AddProjectPage";
 
 class App extends Component {
+  state = {
+    isLoggedIn: false,
+    currentUser: {},
+    currentPage: {},
+    setUser: (data) => this.setState({ currentUser: data }),
+    clearUser: () => this.setState({ currentUser: {} }),
+    setCurrentPage: (data) => this.setState({ currentPage: data }),
+    clearCurrentPage: () => this.setState({ currentPage: {} }),
+  };
+
   render() {
     return (
-      <main>
-        <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Route path="/userAccount/:id" component={UserAccount} />
-          <Route path="/register" component={Registration} />
-          <Route path="/login" component={Login} />
-          <Route path="/search" component={SearchPage} />
-          <Route path="/project/:id" component={ProjectPage} />
-          <Route component={ErrorPage} />
-        </Switch>
-      </main>
+      <Context.Provider value={this.state}>
+        <main>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/user/:userId" component={UserAccount} />
+            <Route path="/register" component={Registration} />
+            <Route path="/login" component={Login} />
+            <Route path="/search" component={SearchPage} />
+            <Route path="/project/:projectId" component={ProjectPage} />
+            <Route path="/add_project" component={AddProjectPage} />
+            <Route component={ErrorPage} />
+          </Switch>
+        </main>
+      </Context.Provider>
     );
   }
 }

@@ -1,37 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
-import PropTypes from "prop-types";
-import { slide as Menu } from "react-burger-menu";
+import Context from "../../Context";
 
-export default function Navbar(props) {
-  const loggedIn = props.loggedIn;
+export default class Navbar extends Component {
+  static contextType = Context;
 
-  return (
-    <nav className="Navbar">
-      <Link to="/">
-        <h1 id="Nav__Logo">inteRsect</h1>
-      </Link>
-      {/* need to create functionality where navbar is different for logged in and not logged in */}
-      <div className="Nav__Links">
-        {loggedIn ? (
-          <>
-            <Link to="/userAccount/:id">Account</Link>
-            <Link to="/userAccount/:id/projects">Projects</Link>
-            <Link to="/search">Search</Link>
-            <Link to="/logout">Log Out</Link>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </>
-        )}
-      </div>
-    </nav>
-  );
+  render() {
+    return (
+      <nav className="Navbar">
+        <Link to="/">
+          <h1 id="Nav__Logo">inteRsect</h1>
+        </Link>
+        {/* need to create functionality where navbar is different for logged in and not logged in */}
+        <div className="Nav__Links">
+          {this.context.isLoggedIn ? (
+            <>
+              <Link to="/user/:userId">Account</Link>
+              <Link to="/search">Search</Link>
+              <Link to="/">Log Out</Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </>
+          )}
+        </div>
+      </nav>
+    );
+  }
 }
-
-Navbar.propTypes = {
-  loggedIn: PropTypes.bool,
-};

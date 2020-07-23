@@ -1,29 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import ProjectContext from "../../contexts/ProjectContext";
 import ProjectApiService from "../../services/project-api-service";
 import "./Project.scss";
+import Context from "../../Context";
 
 export default class Project extends Component {
   static defaultProps = {
     match: { params: {} },
   };
-  static contextType = ProjectContext;
 
-  componentDidMount() {
-    this.context.clearError();
-  }
+  static contextType = Context;
 
-  componentWillUnmount() {
-    this.context.clearProject();
-  }
+  componentDidMount() {}
+
+  componentWillUnmount() {}
 
   renderProjects() {
     // FAKE PROJECTS TO SIMULATE GETTING PROJECTS
     const projects = ProjectApiService.getProjectsByAuthor("fakeAuthor");
     return projects.map((project) => {
       return (
-        <div className="Project">
+        <div key={Math.random() * 11} className="Project">
           <Link to={`/project/${project.id}`}>
             <h3>{project.title} </h3>
           </Link>
@@ -32,7 +29,7 @@ export default class Project extends Component {
           {project.authors.length > 1 ? (
             <p>
               {project.authors.map((author) => (
-                <span key={author}>{author} </span>
+                <span key={Math.random() * 11}>{author} </span>
               ))}
             </p>
           ) : (
@@ -42,7 +39,7 @@ export default class Project extends Component {
           <p>Topics:</p>
           <ul>
             {project.topics.map((topic) => (
-              <li key={topic}>{topic}</li>
+              <li key={-Math.random() * 10}>{topic}</li>
             ))}
           </ul>
         </div>

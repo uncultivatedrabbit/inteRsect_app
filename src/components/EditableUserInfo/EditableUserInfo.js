@@ -6,6 +6,10 @@ export default class EditableUserInfo extends Component {
     isBeingEdited: false,
   };
 
+  handleSubmit = () => {
+
+  }
+
   handleEditMode = () => {
     this.setState({
       isBeingEdited: !this.state.isBeingEdited,
@@ -13,13 +17,13 @@ export default class EditableUserInfo extends Component {
   };
 
   render() {
-    const { userInfo } = this.props;
+    const {userInfo} = this.props;
     return (
       <div className="Editable">
         {this.state.isBeingEdited ? (
           <>
-            <input defaultValue={userInfo} type="text" />
-            <i className="far fa-check-circle"></i>
+            <input autoFocus defaultValue={userInfo} type="text" />
+            <i onClick={this.handleSubmit} className="far fa-check-circle"></i>
             <i onClick={this.handleEditMode} className="fas fa-times"></i>
           </>
         ) : (
