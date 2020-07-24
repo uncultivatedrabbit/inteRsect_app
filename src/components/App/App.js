@@ -9,9 +9,11 @@ import SearchPage from "../../pages/SearchPage/SearchPage";
 import ProjectPage from "../../pages/ProjectPage/ProjectPage";
 import Context from "../../Context";
 import AddProjectPage from "../../pages/AddProjectPage/AddProjectPage";
+import MedicalSpecialties from "../../utils/js/MedicalSpecialties/MedialSpecialties";
 
 class App extends Component {
   state = {
+    medicalSpecialties: MedicalSpecialties,
     isLoggedIn: false,
     currentUser: {},
     currentPage: {},

@@ -2,7 +2,9 @@ import config from "../config";
 
 const ProjectApiService = {
   getAllProjects() {},
-  getProjectsByTopic(topic) {},
+  getProjectsByTopic(filterTerm, dropdownTerm) {
+    console.log(filterTerm, dropdownTerm);
+  },
   getProjectsByAuthor(author) {
     return [
       {
@@ -46,8 +48,8 @@ const ProjectApiService = {
     });
   },
   getProjectComments(projectId) {},
-  postProject(project){
-    console.log(project)
+  postProject(project) {
+    console.log(project);
   },
   postComment(projectId, text, author) {},
 };

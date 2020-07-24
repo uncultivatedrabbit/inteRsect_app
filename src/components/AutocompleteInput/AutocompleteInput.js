@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import ProjectService from "../../services/project-api-service";
+import Context from "../../Context";
+import './AutocompleteInput.scss'
 
 export default class Autocomplete extends Component {
-  static propTypes = {
-    suggestions: PropTypes.instanceOf(Array),
-  };
+  static contextType = Context;
+
   static defaultProperty = {
     suggestions: [],
   };
@@ -49,7 +49,7 @@ export default class Autocomplete extends Component {
   }
 
   onChange = (e) => {
-    const { suggestions } = this.props;
+    const { medicalSpecialties: suggestions } = this.props;
     const userInput = e.currentTarget.value;
     const flattenedSuggestions = [
       ...new Set(
@@ -118,8 +118,9 @@ export default class Autocomplete extends Component {
     return (
       <>
         <input
+          name="Search__Bar"
           type="text"
-          id="search_term"
+          id="filter_term"
           onChange={onChange}
           onKeyDown={onKeyDown}
           value={userInput}

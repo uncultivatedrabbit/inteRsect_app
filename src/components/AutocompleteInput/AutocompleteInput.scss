@@ -1,0 +1,15 @@
+.Suggestions {
+  position: absolute;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 2;
+  margin: 4px 0;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(34, 25, 36, 0.2);
+  
+  li:hover{
+    background-color: grey;
+    cursor: pointer;
+  }
+
+}
