@@ -1,3 +1,21 @@
-.SearchPage{
-  
+@import "../../utils/scss/variables.scss";
+
+.SearchPage {
+  h1 {
+    text-align: center;
+  }
+  form {
+    @include basic-flex;
+    input,
+    select {
+      width: 80%;
+      margin-bottom: 1em;
+      height: 30px;
+    }
+    input[type="submit"] {
+      border: none;
+      @include button;
+      height: auto;
+    }
+  }
 }

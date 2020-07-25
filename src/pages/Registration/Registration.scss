@@ -19,9 +19,6 @@
     border: none;
   }
 
-  input[type="submit"] {
-    @include button;
-  }
   input[type="submit"]:hover {
     background: $mainHoverGreen;
   }

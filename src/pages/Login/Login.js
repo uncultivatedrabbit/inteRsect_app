@@ -12,7 +12,7 @@ export default class Login extends Component {
     this.setState({ error: null });
     const { email, password } = e.target;
     ApiAuthService.postLogin({ email: email.value, password: password.value });
-    this.props.history.push("/userAccount/:id")
+    this.props.history.push("/user/1");
   };
   render() {
     const { error } = this.state;
@@ -30,13 +30,18 @@ export default class Login extends Component {
             <label htmlFor="Login__Email">
               Email <i className="far fa-envelope"></i>
             </label>
-            <input type="email" name="email" id="Login__Email" />
+            <input type="email" required name="email" id="Login__Email" />
           </div>
           <div className="Input__Container">
             <label htmlFor="Login__Password">
               Password <i className="fas fa-lock"></i>
             </label>
-            <input type="password" name="password" id="Login__Password" />
+            <input
+              type="password"
+              required
+              name="password"
+              id="Login__Password"
+            />
           </div>
           <input type="submit" id="Login__Submit" value="Login" />
         </form>

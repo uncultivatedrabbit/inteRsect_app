@@ -14,11 +14,8 @@ export default class UserAccount extends Component {
 
   componentDidMount() {
     const userId = this.props.match.params.userId;
+    this.context.setIsLoggedIn();
     UserApiService.getUser(userId).then((data) => this.context.setUser(data));
-  }
-
-  componentWillUnmount() {
-    this.context.clearUser();
   }
 
   render() {
@@ -34,22 +31,34 @@ export default class UserAccount extends Component {
                 : ""}
             </h1>
             <h2>{currentUser.name}</h2>
-            <EditableUserInfo userInfo={currentUser.email} />
-            <EditableUserInfo userInfo={currentUser.phone} />
-            <EditableUserInfo userInfo={currentUser.website} />
-            <EditableUserInfo userInfo={currentUser.username} />
+            <EditableUserInfo
+              currentUserInfo={`email: ${currentUser.email}`}
+              {...this.props}
+            />
+            {/* <EditableUserInfo
+              currentUserInfo={`email: ${currentUser.email}`}
+              {...this.props}
+            />
+            <EditableUserInfo
+              currentUserInfo={`email: ${currentUser.email}`}
+              {...this.props}
+            />
+            <EditableUserInfo
+              currentUserInfo={`email: ${currentUser.email}`}
+              {...this.props}
+            /> */}
           </section>
 
           <section className="Profile__Details__Container">
             <h2>Biography</h2>
-            <EditableUserInfo />
+            <EditableUserInfo currentUserInfo={`bio: this is my bio`}/>
           </section>
           <section className="Projects__Container">
             <h2>Projects</h2>
             <div className="Projects">
               <Project />
             </div>
-            <Link to="/addProject">Add New Project</Link>
+            <Link to="/add_project">Add New Project</Link>
           </section>
         </div>
       </>

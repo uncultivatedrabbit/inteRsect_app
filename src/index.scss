@@ -10,6 +10,7 @@ body {
   background-color: $mainWhite;
 }
 
+
 h1,
 h2,
 h3,
@@ -29,12 +30,20 @@ ul {
   list-style-type: none;
 }
 
+input[type="submit"] {
+  @include button;
+}
+
 input[type="submit"]:hover {
   cursor: pointer;
   background-color: $mainHoverGreen;
 }
 
-input:focus {
+input:focus, textarea:focus, select:focus {
   outline-color: $mainGreen;
+}
+
+form{
+  max-width: 1600px;
 }
 

@@ -12,13 +12,18 @@ export default class Navbar extends Component {
         <Link to="/">
           <h1 id="Nav__Logo">inteRsect</h1>
         </Link>
-        {/* need to create functionality where navbar is different for logged in and not logged in */}
         <div className="Nav__Links">
           {this.context.isLoggedIn ? (
             <>
-              <Link to="/user/:userId">Account</Link>
-              <Link to="/search">Search</Link>
-              <Link to="/">Log Out</Link>
+              <Link to={`/user/${this.context.currentUser.id}`}>
+                <i className="fas fa-home"></i>
+              </Link>
+              <Link to="/search">
+                <i className="fas fa-search"></i>
+              </Link>
+              <Link to="/">
+                <i className="fas fa-sign-out-alt"></i>
+              </Link>
             </>
           ) : (
             <>

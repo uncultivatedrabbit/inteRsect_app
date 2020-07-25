@@ -24,6 +24,7 @@ export default class SearchPage extends Component {
     );
   };
 
+
   render() {
     return (
       <>
@@ -37,7 +38,7 @@ export default class SearchPage extends Component {
               medicalSpecialties={this.state.filteredSpecialties}
             />
             <label htmlFor="med__dropdown__selection">Specialties:</label>
-            <DropdownInput />
+            <DropdownInput includeAll={true}/>
             <input type="submit" value="Search" />
           </form>
         </div>

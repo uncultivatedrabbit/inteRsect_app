@@ -3,7 +3,13 @@
 .Editable {
   display: flex;
   align-items: center;
-
+  form {
+    display: flex;
+    align-items: center;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
   p {
     padding: 1px 2px;
   }
@@ -21,5 +27,18 @@
     margin: 1em 0;
     font-family: $mainFont;
     width: 100%;
+    word-wrap: break-word;
+  }
+  button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+  }
+
+  textarea {
+    font-size: 20px;
+    font-family: $mainFont;
   }
 }

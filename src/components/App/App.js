@@ -17,10 +17,22 @@ class App extends Component {
     isLoggedIn: false,
     currentUser: {},
     currentPage: {},
+    currentSpecialty: '',
     setUser: (data) => this.setState({ currentUser: data }),
     clearUser: () => this.setState({ currentUser: {} }),
     setCurrentPage: (data) => this.setState({ currentPage: data }),
     clearCurrentPage: () => this.setState({ currentPage: {} }),
+    setIsLoggedIn: () => this.setState({ isLoggedIn: true }),
+    setCurrentSpecialty: (data) => this.setState({currentSpecialty: data}),
+    clearCurrentSpecialty: () => this.setState({currentSpecialty: ''}),
+    updateUser: (category, data) => {
+      this.setState({
+        currentUser: {
+          ...this.state.currentUser,
+          [category]: data,
+        },
+      });
+    },
   };
 
   render() {

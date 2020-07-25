@@ -7,7 +7,7 @@ import PdfForm from "../../components/PdfForm/PdfForm";
 
 export default class ProjectPage extends Component {
   state = {
-    authorNames: null,
+    authorName: null,
   };
   static defaultProps = { match: { params: {} } };
 
@@ -24,7 +24,7 @@ export default class ProjectPage extends Component {
   getProjectAuthor(authorId) {
     if (authorId) {
       ProjectApiService.getProjectAuthors(authorId).then((data) => {
-        this.setState({ authorNames: data.name });
+        this.setState({ authorName: data.name });
       });
     }
   }
@@ -41,7 +41,8 @@ export default class ProjectPage extends Component {
         <section className="Project__Page">
           <h1>Project Title {currentPage.title}</h1>
           <hr />
-          <h2>Authors: {this.state.authorNames}</h2>
+          <h2>Principle Investigator: {this.state.authorName}</h2>
+          <p>Internal Review Board Status: IRB Accepted</p>
           <p>Synopsis:</p>
           <p>{currentPage.body}</p>
           <h2>Upload Full Text as PDF</h2>

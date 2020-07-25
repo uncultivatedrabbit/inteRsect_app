@@ -1,0 +1,23 @@
+@import "../../utils/scss/variables.scss";
+
+.AddProjectPage {
+  h1{
+    text-align: center;
+  }
+  form {
+    @include basic-flex;
+    align-items: inherit;
+    width: 80vw;
+    max-width: 800px;
+    margin: 0 auto;
+
+    textarea{
+      height: 250px;
+    }
+
+    textarea:focus {
+      outline: $mainGreen auto 1px;
+      font-family: $mainFont;
+    }
+  }
+}
