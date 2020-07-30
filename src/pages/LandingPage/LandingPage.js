@@ -1,44 +1,38 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import "./LandingPage.scss";
-import MedicalSpecialties from "../../utils/js/MedicalSpecialties/MedialSpecialties";
+import TokenService from "../../services/token-service";
+import parseJwt from "../../utils/js/parseJwt";
+import Context from "../../Context";
+import HomePage from "../HomePage/HomePage";
+import StaticLandingPage from "../../components/StaticLandingPage/StaticLandingPage";
 
 export default class LandingPage extends Component {
-  state = {
-    medicalspecialties: MedicalSpecialties,
-  };
+  static contextType = Context;
 
-  renderMedicalSpecialtyPills() {
-    const specialties = this.state.medicalspecialties;
+  componentDidMount() {
+    this.checkIfUserLoggedIn();
+  }
 
-    return specialties.map((specialty, i) => {
-      return <p className="pill" key={i}>{Object.keys(specialty)[0]}</p>;
-    });
+  checkIfUserLoggedIn() {
+    const token = TokenService.getAuthToken();
+    if (!token) {
+      this.context.setIsLoggedIn(false);
+    }
+    const { user_id, sub } = parseJwt(token);
+    this.context.setIsLoggedIn(true);
+    this.context.setUser({ user_id, email: sub });
   }
 
   render() {
     return (
       <>
-        <Navbar loggedIn={false} />
-        <div className="Landing__Page">
-          <section className="Landing__Hero">
-            <h2>Bringing research teams together</h2>
-            <Link to="/register">Register Now</Link>
-          </section>
-          <section className="Landing__About">
-            <h2>Get your projects off the ground</h2>
-            <p>
-              Share your own research, find projects and opportunities for
-              collaboration, and ensure you have the support you need to expand
-              knowledge in your field.
-            </p>
-          </section>
-          <section className="Landing__Topics">
-            <h2>Research with a focus on medical fields</h2>
-            {this.renderMedicalSpecialtyPills()}
-          </section>
-        </div>
+        <Navbar />
+        {this.context.isLoggedIn ? (
+          <HomePage/>
+        ) : (
+          <StaticLandingPage/>
+        )}
       </>
     );
   }

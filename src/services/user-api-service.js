@@ -3,7 +3,7 @@ import config from "../config";
 const UserApiService = {
   getAllUsers() {},
   getUser(userId) {
-    return fetch(`https://jsonplaceholder.typicode.com/users/${userId}`).then(
+    return fetch(`${config.API_ENDPOINT}/users/${userId}`).then(
       (res) => {
         if (!res.ok) {
           return res.json().then((e) => Promise.reject(e));

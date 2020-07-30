@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ApiAuthService from "../../services/auth-api-service";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./Login.scss";
+import TokenService from "../../services/token-service";
 
 export default class Login extends Component {
   static defaultProps = {};
@@ -16,14 +17,14 @@ export default class Login extends Component {
       .then((res) => {
         email.value = "";
         password.value = "";
+        TokenService.saveAuthToken(res.authToken);
         this.handleLoginSuccess();
       })
       .catch((res) => this.setState({ error: res.error }));
   };
 
   handleLoginSuccess = () => {
-    console.log("logged in");
-    this.props.history.push("/")
+    this.props.history.push("/");
   };
 
   render() {
@@ -36,7 +37,6 @@ export default class Login extends Component {
           </Link>
         </header>
         <form className="Login__Form" onSubmit={this.handleSubmit}>
-          {/* display errors to the UI */}
           <div role="alert">{error && <ErrorMessage error={error} />}</div>
           <div className="Input__Container">
             <label htmlFor="Login__Email">
