@@ -1,6 +1,19 @@
+@import "../../utils/scss/variables.scss";
+
 .Landing__Page {
-  .Landing__Hero,
-  .Landing__About {
+
+  section {
     padding: 0 2em;
+  }
+
+  section a {
+    @include button;
+    max-width: 200px;
+    text-align: center;
+
+    &:hover {
+      background: $mainHoverGreen;
+    }
+
   }
 }

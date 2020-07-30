@@ -1,7 +1,7 @@
 @import "../../utils/scss/variables.scss";
 
 .Registration__Header {
-  padding: 3em 5em;
+  padding: 2em 5em;
 
   .Registration__Logo {
     text-align: center;
@@ -12,9 +12,12 @@
 
 .Reg__Form {
   @include basic-flex;
-
+  max-width: 500px;
+  width: 70vw;
+  margin: 0 auto;
+  
   input {
-    width: 70vw;
+    width: 100%;
     padding: 1em;
     border: none;
   }
@@ -25,9 +28,15 @@
 
   .Input__Container {
     display: flex;
+    width: 100%;
     flex-direction: column;
     margin-bottom: 1em;
     border-bottom: 1px solid grey;
+
+    label i {
+      padding-left: 4px;
+      font-size: 15px;
+    }
   }
 }
 

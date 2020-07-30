@@ -1,7 +1,7 @@
 @import "../../utils/scss/variables.scss";
 
 .Login__Header {
-  padding: 3em 5em;
+  padding: 2em 5em;
 
   .Login__Logo {
     text-align: center;
@@ -12,9 +12,12 @@
 
 .Login__Form {
   @include basic-flex;
+  max-width: 500px;
+  width: 70vw;
+  margin: 0 auto;
 
   input {
-    width: 70vw;
+    width: 100%;
     padding: 1em;
     border: none;
   }
@@ -26,8 +29,14 @@
   .Input__Container {
     display: flex;
     flex-direction: column;
+    width: 100%;
     margin-bottom: 1em;
     border-bottom: 1px solid $mainGreen;
+
+    label i{
+      padding-left: 4px;
+      font-size: 15px;
+    }
   }
 }
 

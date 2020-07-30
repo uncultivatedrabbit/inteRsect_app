@@ -1,19 +1,39 @@
+@import '../../utils/scss/variables.scss';
+
 .Navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid grey;
+  border-bottom: 2px solid $mainHoverGreen;
+  background-color: $mainGreen;
+  color: $mainWhite;
 
   .Nav__Links {
     display: flex;
     padding: 0 1em;
     align-items: center;
 
+    a {
+      background-color: $mainWhite;
+      color: $mainGreen;
+      margin: 0 5px;
+      border-radius: 15px;
+      border: 1px solid $mainHoverGreen;
+
+      &:hover {
+        background-color: $mainGreen;
+        color: $mainWhite;
+        border: 1px solid $mainWhite;
+      }
+    }
+
     * {
       padding: 0 0.5em;
     }
   }
+
   #Nav__Logo {
     padding: 0 1em;
+    color: $mainWhite;
   }
 }
