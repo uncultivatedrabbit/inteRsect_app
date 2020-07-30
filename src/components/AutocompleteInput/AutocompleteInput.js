@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProjectService from "../../services/project-api-service";
 import Context from "../../Context";
-import './AutocompleteInput.scss'
+import "./AutocompleteInput.scss";
 
 export default class Autocomplete extends Component {
   static contextType = Context;
@@ -17,6 +17,12 @@ export default class Autocomplete extends Component {
     userInput: "",
   };
 
+  /**
+   * @function dynamically renders suggestions
+   * depending on user input for specialty dropdown input
+   * by checking against list of medical specialties in context
+   * and returns a warning div if there are no matches
+   */
   renderSuggestionListComponent(
     showSuggestions,
     userInput,
@@ -48,6 +54,10 @@ export default class Autocomplete extends Component {
     return suggestionsListComponent;
   }
 
+  /**
+   * @function handles change event for the search bar
+   * and saves the user input to state
+   */
   onChange = (e) => {
     const { medicalSpecialties: suggestions } = this.props;
     const userInput = e.currentTarget.value;
@@ -75,6 +85,12 @@ export default class Autocomplete extends Component {
     });
   };
 
+  /**
+   * @function gets the user search term
+   * from the event target and passes that term
+   * into the Project Service API in order to GET
+   * projects that have that specialty
+   */
   onClick = (e) => {
     const searchTerm = e.currentTarget.innerText;
     ProjectService.getProjectsByTopic(searchTerm);
@@ -86,6 +102,10 @@ export default class Autocomplete extends Component {
     });
   };
 
+  /**
+   * @function handles navigating the active suggestions
+   * using only the keyboard
+   */
   onKeyDown = (e) => {
     const { activeSuggestion, filteredSuggestions } = this.state;
     if (e.keyCode === 13) {

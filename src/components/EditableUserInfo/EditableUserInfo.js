@@ -13,6 +13,12 @@ export default class EditableUserInfo extends Component {
     isBeingEdited: false,
   };
 
+  /**
+   * @function keeps track of edited user input
+   * and passes that input along to both context in the UI
+   * and the UserAPI Service to make a PATCH request to
+   * the database
+   */
   handleSubmit = (e) => {
     e.preventDefault();
     const userId = this.props.match.params.userId;
@@ -25,6 +31,11 @@ export default class EditableUserInfo extends Component {
     this.setState({ isBeingEdited: false });
   };
 
+  /**
+   * @function sets state to either true or false
+   * @boolean used to determine if
+   * the user input is being edited or not
+   */
   handleEditMode = () => {
     this.setState({
       isBeingEdited: !this.state.isBeingEdited,
@@ -49,7 +60,7 @@ export default class EditableUserInfo extends Component {
                   // set cursor to end of default text value
                   onFocus={(e) => {
                     const val = e.target.value;
-                    e.target.value = '';
+                    e.target.value = "";
                     e.target.value = val;
                   }}
                 />

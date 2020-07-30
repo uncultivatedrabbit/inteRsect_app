@@ -3,13 +3,21 @@ import Context from "../../Context";
 
 export default class DropdownInput extends Component {
   static contextType = Context;
-  
-  // keeps track of which specialty the user is currently on, and updates context accordingly
+
+  /**
+   * @function keeps track of which specialty the user is currently on
+   * and updates context accordingly
+   */
   handleChange = (e) => {
     const specialty = e.target.value;
-    this.context.setCurrentSpecialty(specialty)
-  }
+    this.context.setCurrentSpecialty(specialty);
+  };
 
+  /**
+   * @function gets the medical specialties from context
+   * and creates a dropdown option list using the keys for
+   * each specialty
+   */
   renderTopics = () => {
     const { medicalSpecialties } = this.context;
     return medicalSpecialties.map((specialty) => {
@@ -22,7 +30,10 @@ export default class DropdownInput extends Component {
   };
   render() {
     return (
-      <select onChange={this.handleChange} id="dropdown_selection" name="dropdown_selection">
+      <select
+        onChange={this.handleChange}
+        id="dropdown_selection"
+        name="dropdown_selection">
         {this.props.includeAll ? (
           <option value="All">--------All---------</option>
         ) : (

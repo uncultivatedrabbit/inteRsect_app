@@ -86,7 +86,7 @@ export default class AddProjectPage extends Component {
             {this.handleRenderSubspecialtyMenu()}
             <label htmlFor="IRB__Status">IRB Status*</label>
             <select name="IRB__Status">
-              <option value="">----</option>
+              <option value="">--------</option>
               <option value="accepted">Need to Apply</option>
               <option value="accepted">Submitted</option>
               <option value="accepted">Accepted</option>

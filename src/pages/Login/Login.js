@@ -5,15 +5,27 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./Login.scss";
 
 export default class Login extends Component {
+  static defaultProps = {};
   state = { error: null };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ error: null });
     const { email, password } = e.target;
-    ApiAuthService.postLogin({ email: email.value, password: password.value });
-    this.props.history.push("/user/1");
+    ApiAuthService.postLogin({ email: email.value, password: password.value })
+      .then((res) => {
+        email.value = "";
+        password.value = "";
+        this.handleLoginSuccess();
+      })
+      .catch((res) => this.setState({ error: res.error }));
   };
+
+  handleLoginSuccess = () => {
+    console.log("logged in");
+    this.props.history.push("/")
+  };
+
   render() {
     const { error } = this.state;
     return (
