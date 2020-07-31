@@ -18,21 +18,18 @@ export default class LandingPage extends Component {
     const token = TokenService.getAuthToken();
     if (!token) {
       this.context.setIsLoggedIn(false);
+    } else {
+      const { user_id, sub } = parseJwt(token);
+      this.context.setIsLoggedIn(true);
+      this.context.setUser({ user_id, email: sub });
     }
-    const { user_id, sub } = parseJwt(token);
-    this.context.setIsLoggedIn(true);
-    this.context.setUser({ user_id, email: sub });
   }
 
   render() {
     return (
       <>
-        <Navbar />
-        {this.context.isLoggedIn ? (
-          <HomePage/>
-        ) : (
-          <StaticLandingPage/>
-        )}
+        <Navbar {...this.props} />
+        {this.context.isLoggedIn ? <HomePage /> : <StaticLandingPage />}
       </>
     );
   }

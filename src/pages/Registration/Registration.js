@@ -11,6 +11,11 @@ export default class Registration extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { full_name, email, password, verification } = e.target;
+    const validPassword = VerificationService.verifyValidPassword(password.value)
+    if (validPassword !== "Valid Password"){
+      this.setState({error: validPassword})
+      return;
+    }
     // verify that the passwords match before submitting to the server
     const passwordsMatch = VerificationService.verifyPasswordsMatch(
       password.value,

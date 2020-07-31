@@ -1,0 +1,8 @@
+@import '../../utils/scss/variables.scss';
+
+.Error__Msg{
+  background-color: $mainRed;
+  color: $mainWhite;
+  padding: 0.3em 1em;
+  border-radius: 15px;
+}

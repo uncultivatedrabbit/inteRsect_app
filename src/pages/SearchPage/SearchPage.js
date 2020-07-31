@@ -12,7 +12,7 @@ export default class SearchPage extends Component {
   // initialize all the possible medical specialties as the global state object
   state = {
     filteredSpecialties: this.context.medicalSpecialties,
-    updateFilteredSpecialties: {}
+    updateFilteredSpecialties: {},
   };
 
   handleSubmit = (e) => {
@@ -24,11 +24,10 @@ export default class SearchPage extends Component {
     );
   };
 
-
   render() {
     return (
       <>
-        <Navbar />
+        <Navbar {...this.props} />
         <div className="SearchPage">
           <h1>Search page</h1>
           <section className="Search__Sidebar"></section>
@@ -38,7 +37,7 @@ export default class SearchPage extends Component {
               medicalSpecialties={this.state.filteredSpecialties}
             />
             <label htmlFor="med__dropdown__selection">Specialties:</label>
-            <DropdownInput includeAll={true}/>
+            <DropdownInput includeAll={true} />
             <input type="submit" value="Search" />
           </form>
         </div>

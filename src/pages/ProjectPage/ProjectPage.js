@@ -4,7 +4,6 @@ import Context from "../../Context";
 import ProjectApiService from "../../services/project-api-service";
 import PdfForm from "../../components/PdfForm/PdfForm";
 
-
 export default class ProjectPage extends Component {
   state = {
     authorName: null,
@@ -37,7 +36,7 @@ export default class ProjectPage extends Component {
     const { currentPage } = this.context;
     return (
       <>
-        <Navbar />
+        <Navbar {...this.props} />
         <section className="Project__Page">
           <h1>Project Title {currentPage.title}</h1>
           <hr />

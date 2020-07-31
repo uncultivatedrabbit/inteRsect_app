@@ -2,8 +2,8 @@ import config from "../config";
 
 const UserApiService = {
   getAllUsers() {},
-  getUser(userId) {
-    return fetch(`${config.API_ENDPOINT}/users/${userId}`).then(
+  getUserById(userId) {
+    return fetch(`${config.API_ENDPOINT}/api/users/${userId}`).then(
       (res) => {
         if (!res.ok) {
           return res.json().then((e) => Promise.reject(e));

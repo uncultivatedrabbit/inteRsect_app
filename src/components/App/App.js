@@ -22,7 +22,7 @@ class App extends Component {
     clearUser: () => this.setState({ currentUser: {} }),
     setCurrentPage: (data) => this.setState({ currentPage: data }),
     clearCurrentPage: () => this.setState({ currentPage: {} }),
-    setIsLoggedIn: () => this.setState({ isLoggedIn: true }),
+    setIsLoggedIn: (bool) => this.setState({ isLoggedIn: bool }),
     setCurrentSpecialty: (data) => this.setState({currentSpecialty: data}),
     clearCurrentSpecialty: () => this.setState({currentSpecialty: ''}),
     updateUser: (category, data) => {

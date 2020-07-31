@@ -12,17 +12,12 @@ export default class UserAccount extends Component {
 
   static contextType = Context;
 
-  componentDidMount() {
-    const userId = this.props.match.params.userId;
-    this.context.setIsLoggedIn();
-    UserApiService.getUser(userId).then((data) => this.context.setUser(data));
-  }
+  componentDidMount() {}
 
   render() {
-    const { currentUser } = this.context;
     return (
       <>
-        <Navbar />
+        {/* <Navbar {...this.props}/>
         <div className="User__Account">
           <section className="Profile__Header__Container">
             <h1 id="User__Logo">
@@ -34,8 +29,8 @@ export default class UserAccount extends Component {
             <EditableUserInfo
               currentUserInfo={`email: ${currentUser.email}`}
               {...this.props}
-            />
-            {/* <EditableUserInfo
+            /> */}
+        {/* <EditableUserInfo
               currentUserInfo={`email: ${currentUser.email}`}
               {...this.props}
             />
@@ -47,7 +42,7 @@ export default class UserAccount extends Component {
               currentUserInfo={`email: ${currentUser.email}`}
               {...this.props}
             /> */}
-          </section>
+        {/* </section>
 
           <section className="Profile__Details__Container">
             <h2>Biography</h2>
@@ -60,7 +55,7 @@ export default class UserAccount extends Component {
             </div>
             <Link to="/add_project">Add New Project</Link>
           </section>
-        </div>
+        </div> */}
       </>
     );
   }
