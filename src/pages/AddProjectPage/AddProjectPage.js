@@ -5,10 +5,29 @@ import "./AddProjectPage.scss";
 import Context from "../../Context";
 import DropdownInput from "../../components/DropdownInput/DropdownInput";
 import MedicalSpecialties from "../../utils/js/MedicalSpecialties/MedialSpecialties";
+import TokenService from "../../services/token-service";
+import parseJwt from "../../utils/js/parseJwt";
+import UserApiService from "../../services/user-api-service";
 
 export default class AddProjectPage extends Component {
   static contextType = Context;
 
+  componentDidMount() {
+    this.verifyUserLoggedIn();
+  }
+
+  verifyUserLoggedIn() {
+    const token = TokenService.getAuthToken();
+    if (!token) {
+      this.context.setIsLoggedIn(false);
+    } else {
+      const { user_id, sub } = parseJwt(token);
+      this.context.setIsLoggedIn(true);
+      UserApiService.getUserById(user_id).then((data) => {
+        this.context.setUser(data);
+      });
+    }
+  }
   /**
    * @function dynamically renders subspecialties
    * depending on user input for specialty dropdown input
@@ -50,25 +69,42 @@ export default class AddProjectPage extends Component {
    */
   handleSubmit = (e) => {
     e.preventDefault();
+    const { id } = this.context.currentUser;
+
     const {
       title,
       summary,
       dropdown_selection,
       IRB__Status,
       subspecialties,
+      file,
     } = e.target;
-    ProjectApiService.postProject({
-      title: title.value,
-      summary: summary.value,
-      IrbStatus: IRB__Status.value,
-      specialty: dropdown_selection.value,
-      subspecialty: subspecialties.value || null,
-    });
+    if (!subspecialties) {
+      ProjectApiService.postProject({
+        owner_id: id,
+        title: title.value,
+        summary: summary.value,
+        IrbStatus: IRB__Status.value,
+        specialty: dropdown_selection.value,
+        subspecialty: null,
+        file: null,
+      });
+    } else {
+      ProjectApiService.postProject({
+        owner_id: id,
+        title: title.value,
+        summary: summary.value,
+        IrbStatus: IRB__Status.value,
+        specialty: dropdown_selection.value,
+        subspecialty: subspecialties.value,
+        file: null,
+      });
+    }
   };
   render() {
     return (
       <>
-        <Navbar />
+        <Navbar {...this.props} />
         <div className="AddProjectPage">
           <h1>Add New Medical Research Project</h1>
           <form onSubmit={(e) => this.handleSubmit(e)}>
@@ -82,17 +118,17 @@ export default class AddProjectPage extends Component {
               id="New__Proj__Summary"
             />
             <label htmlFor="New__Proj__Medical_Specialties">Specialties*</label>
-            <DropdownInput />
+            <DropdownInput required={true} />
             {this.handleRenderSubspecialtyMenu()}
             <label htmlFor="IRB__Status">IRB Status*</label>
-            <select name="IRB__Status">
+            <select required name="IRB__Status">
               <option value="">--------</option>
               <option value="accepted">Need to Apply</option>
               <option value="accepted">Submitted</option>
               <option value="accepted">Accepted</option>
               <option value="accepted">Exempt</option>
             </select>
-            <label htmlFor="New__Proj__File">Full Manuscript</label>
+            <label htmlFor="New__Proj__File">Working Manuscript</label>
             <input type="file" accept=".pdf" name="file" id="New__Proj__File" />
             <input type="submit" value="Submit" />
           </form>

@@ -33,7 +33,9 @@ export default class DropdownInput extends Component {
       <select
         onChange={this.handleChange}
         id="dropdown_selection"
-        name="dropdown_selection">
+        name="dropdown_selection"
+        required={this.props.required}
+        >
         {this.props.includeAll ? (
           <option value="All">--------All---------</option>
         ) : (

@@ -5,9 +5,28 @@ import AutocompleteInput from "../../components/AutocompleteInput/AutocompleteIn
 import ProjectService from "../../services/project-api-service";
 import DropdownInput from "../../components/DropdownInput/DropdownInput";
 import Context from "../../Context";
+import TokenService from "../../services/token-service";
+import parseJwt from "../../utils/js/parseJwt";
+import UserApiService from "../../services/user-api-service";
 
 export default class SearchPage extends Component {
   static contextType = Context;
+
+  componentDidMount() {
+    this.verifyUserLoggedIn();
+  }
+  verifyUserLoggedIn() {
+    const token = TokenService.getAuthToken();
+    if (!token) {
+      this.context.setIsLoggedIn(false);
+    } else {
+      const { user_id, sub } = parseJwt(token);
+      this.context.setIsLoggedIn(true);
+      UserApiService.getUserById(user_id).then((data) => {
+        this.context.setUser(data);
+      });
+    }
+  }
 
   // initialize all the possible medical specialties as the global state object
   state = {

@@ -1,3 +1,5 @@
+
+
 const HelperFunctions = {
   capitalCaseName(name, splitByChar) {
     return name
@@ -8,7 +10,6 @@ const HelperFunctions = {
   createUserLogo(name) {
     return name.slice(0, 1).toUpperCase();
   },
-
 };
 
 export default HelperFunctions;

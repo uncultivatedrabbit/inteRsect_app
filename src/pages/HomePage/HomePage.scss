@@ -16,6 +16,9 @@
         background-color: $mainGreen;
       }
     }
+    h2{
+      letter-spacing: 2px;
+    }
     #edit-btn {
       @include button;
       font-size: 16px;
@@ -32,6 +35,7 @@
   }
   .Projects__Container {
     text-align: center;
+    margin: 0 1em;
     max-width: 600px;
     a {
       @include button;
