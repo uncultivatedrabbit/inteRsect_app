@@ -5,47 +5,68 @@ import Project from "../../components/Project/Project";
 import EditableUserInfo from "../../components/EditableUserInfo/EditableUserInfo";
 import { Link } from "react-router-dom";
 import HelperFunctions from "../../utils/js/helpers";
+import "./HomePage.scss";
 
 export default class HomePage extends Component {
   state = {
-    user: "",
+    editModeEnabled: false,
   };
   static contextType = Context;
 
-  componentDidMount() {
-    const userId = this.context.currentUser.user_id;
-    UserApiService.getUserById(userId).then((data) =>
-      this.setState({ user: data })
-    );
+  handleEditMode() {
+    this.setState({ editModeEnabled: !this.state.editModeEnabled });
   }
 
   render() {
-    const { user } = this.state;
+    const { currentUser } = this.context;
     return (
       <div className="Home__Page">
         <section className="Profile__Header__Container">
-          <h1 id="User__Logo">
-            {typeof user.full_name === "string"
-              ? HelperFunctions.createUserLogo(user.full_name)
-              : ""}
-          </h1>
-          <h2>{user ? HelperFunctions.capitalCaseName(user.full_name) : ""}</h2>
+          <header>
+            <h1 id="User__Logo">
+              {typeof currentUser.full_name === "string"
+                ? HelperFunctions.createUserLogo(currentUser.full_name)
+                : ""}
+            </h1>
+          </header>
+          <h2>
+            Welcome{", "}
+            {currentUser.full_name ? HelperFunctions.capitalCaseName(currentUser.full_name, " ") : ""}!
+          </h2>
           <EditableUserInfo
-            currentUserInfo={`email: ${user.email}`}
+            editModeEnabled={this.state.editModeEnabled}
+            currentUserInfo={`email: ${currentUser.email}`}
             {...this.props}
           />
           <EditableUserInfo
-            currentUserInfo={`university_affiliaton: ${user.university_affiliation}`}
+            editModeEnabled={this.state.editModeEnabled}
+            currentUserInfo={`university_affiliation: ${currentUser.university_affiliation}`}
             {...this.props}
           />
           <EditableUserInfo
-            currentUserInfo={`academic_level: ${user.academic_level}`}
+            editModeEnabled={this.state.editModeEnabled}
+            currentUserInfo={`academic_level: ${currentUser.academic_level}`}
             {...this.props}
           />
+          {this.state.editModeEnabled ? <button
+            onClick={() => this.handleEditMode()}
+            id="edit-btn"
+            className="Edit__Button">
+            Finished Editing
+          </button> : <button
+            onClick={() => this.handleEditMode()}
+            id="edit-btn"
+            className="Edit__Button">
+            Edit
+          </button>}
         </section>
         <section className="Profile__Details__Container">
           <h2>Biography</h2>
-          <EditableUserInfo currentUserInfo={`bio: ${user.biography}`} />
+          <EditableUserInfo
+            editModeEnabled={this.state.editModeEnabled}
+            currentUserInfo={`biography: ${currentUser.biography}`}
+            {...this.props}
+          />
         </section>
         <section className="Projects__Container">
           <h2>Projects</h2>

@@ -17,14 +17,16 @@ class App extends Component {
     isLoggedIn: false,
     currentUser: {},
     currentPage: {},
-    currentSpecialty: '',
+    currentSpecialty: "",
+    redirectedFromReg: false,
     setUser: (data) => this.setState({ currentUser: data }),
     clearUser: () => this.setState({ currentUser: {} }),
     setCurrentPage: (data) => this.setState({ currentPage: data }),
     clearCurrentPage: () => this.setState({ currentPage: {} }),
     setIsLoggedIn: (bool) => this.setState({ isLoggedIn: bool }),
-    setCurrentSpecialty: (data) => this.setState({currentSpecialty: data}),
-    clearCurrentSpecialty: () => this.setState({currentSpecialty: ''}),
+    setCurrentSpecialty: (data) => this.setState({ currentSpecialty: data }),
+    clearCurrentSpecialty: () => this.setState({ currentSpecialty: "" }),
+    setRedirectedFromReg: (bool) => this.setState({ redirectedFromReg: bool }),
     updateUser: (category, data) => {
       this.setState({
         currentUser: {

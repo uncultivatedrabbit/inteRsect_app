@@ -1,0 +1,53 @@
+@import "../../utils/scss/variables.scss";
+
+.Home__Page {
+  .Profile__Header__Container {
+    background-color: #747d8c;
+    color: $mainWhite;
+    text-align: center;
+    header {
+      font-size: 2rem;
+
+      h1 {
+        display: inline-block;
+        border: 2px $mainWhite dashed;
+        padding: 0.4em 0.8em;
+        border-radius: 50px;
+        background-color: $mainGreen;
+      }
+    }
+    #edit-btn {
+      @include button;
+      font-size: 16px;
+      border: none;
+      margin: 1em 0;
+      &:hover {
+        background-color: $mainHoverGreen;
+        cursor: pointer;
+      }
+    }
+  }
+  .Profile__Details__Container {
+    text-align: center;
+  }
+  .Projects__Container {
+    text-align: center;
+    max-width: 600px;
+    a {
+      @include button;
+      text-align: center;
+      &:hover {
+        background-color: $mainHoverGreen;
+      }
+    }
+    .Project {
+      a {
+        @include button;
+        padding: 0.1em;
+        &:hover {
+          background-color: $mainHoverGreen;
+        }
+      }
+    }
+  }
+}

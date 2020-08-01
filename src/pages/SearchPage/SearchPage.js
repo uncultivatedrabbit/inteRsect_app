@@ -32,7 +32,7 @@ export default class SearchPage extends Component {
           <h1>Search page</h1>
           <section className="Search__Sidebar"></section>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="Search__Bar">Search By Speciality</label>
+            <label htmlFor="Search__Bar">Search By Keyword</label>
             <AutocompleteInput
               medicalSpecialties={this.state.filteredSpecialties}
             />

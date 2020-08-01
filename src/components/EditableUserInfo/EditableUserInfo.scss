@@ -3,6 +3,15 @@
 .Editable {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+
+  .Category__Label {
+    color: #eccc68;
+    font-weight: 700;
+    margin: 0 0.2em;
+  }
   form {
     display: flex;
     align-items: center;
@@ -11,20 +20,26 @@
     padding: 0;
   }
   p {
+    font-size: 18px;
     padding: 1px 2px;
+    margin: 0.1em 0;
   }
 
   i {
     margin-left: 1em;
     cursor: pointer;
+    color: $mainWhite;
+    &:focus{
+      outline: none;
+    }
   }
   .fa-pencil-alt {
     font-size: 0.8rem;
   }
   input {
     border: none;
-    font-size: 20px;
-    margin: 1em 0;
+    font-size: 18px;
+    margin: 1em  0 1em 1em;
     font-family: $mainFont;
     width: 100%;
     word-wrap: break-word;
@@ -38,7 +53,7 @@
   }
 
   textarea {
-    font-size: 20px;
+    font-size: 18px;
     font-family: $mainFont;
   }
 }

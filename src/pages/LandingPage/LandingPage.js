@@ -6,6 +6,8 @@ import parseJwt from "../../utils/js/parseJwt";
 import Context from "../../Context";
 import HomePage from "../HomePage/HomePage";
 import StaticLandingPage from "../../components/StaticLandingPage/StaticLandingPage";
+import UserAccount from "../UserAccount/UserAccount";
+import UserApiService from "../../services/user-api-service";
 
 export default class LandingPage extends Component {
   static contextType = Context;
@@ -21,7 +23,9 @@ export default class LandingPage extends Component {
     } else {
       const { user_id, sub } = parseJwt(token);
       this.context.setIsLoggedIn(true);
-      this.context.setUser({ user_id, email: sub });
+      UserApiService.getUserById(user_id).then(data => {
+        this.context.setUser(data)
+      })
     }
   }
 

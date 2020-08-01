@@ -4,9 +4,11 @@ import ApiAuthService from "../../services/auth-api-service";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./Login.scss";
 import TokenService from "../../services/token-service";
+import Context from "../../Context";
 
 export default class Login extends Component {
   static defaultProps = {};
+  static contextType = Context;
   state = { error: null };
 
   handleSubmit = (e) => {
@@ -24,6 +26,7 @@ export default class Login extends Component {
   };
 
   handleLoginSuccess = () => {
+    this.context.setRedirectedFromReg(false);
     this.props.history.push("/");
   };
 
@@ -37,6 +40,11 @@ export default class Login extends Component {
           </Link>
         </header>
         <form className="Login__Form" onSubmit={this.handleSubmit}>
+          {this.context.redirectedFromReg ? (
+            <div className="Success">Registration Success</div>
+          ) : (
+            ""
+          )}
           <div role="alert">{error && <ErrorMessage error={error} />}</div>
           <div className="Input__Container">
             <label htmlFor="Login__Email">

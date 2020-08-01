@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./EditableUserInfo.scss";
 import Context from "../../Context";
 import UserApiService from "../../services/user-api-service";
+import HelperFunctions from "../../utils/js/helpers";
 
 export default class EditableUserInfo extends Component {
   static defaultProps = { match: { params: {} } };
@@ -21,13 +22,12 @@ export default class EditableUserInfo extends Component {
    */
   handleSubmit = (e) => {
     e.preventDefault();
-    const userId = this.props.match.params.userId;
+    const userId = this.context.currentUser.id;
     const { editedInfo } = e.target;
     const category = this.props.currentUserInfo.split(":")[0];
-    // Update user info in UI
-    this.context.updateUser(category, editedInfo.value);
-    // PATCH request for user info in DB
     UserApiService.updateUser(userId, category, editedInfo.value);
+    this.context.updateUser(category, editedInfo.value);
+    
     this.setState({ isBeingEdited: false });
   };
 
@@ -52,7 +52,7 @@ export default class EditableUserInfo extends Component {
           <>
             <form onSubmit={this.handleSubmit}>
               {/* uses text area only for bio form */}
-              {category === "bio" ? (
+              {category === "biography" ? (
                 <textarea
                   name="editedInfo"
                   autoFocus
@@ -65,12 +65,20 @@ export default class EditableUserInfo extends Component {
                   }}
                 />
               ) : (
-                <input
-                  name="editedInfo"
-                  autoFocus
-                  defaultValue={defaultValue}
-                  type="text"
-                />
+                <>
+                  <label
+                    className="Category__Label"
+                    htmlFor="editedInfo">{`${HelperFunctions.capitalCaseName(
+                    category,
+                    "_"
+                  )}:  `}</label>
+                  <input
+                    name="editedInfo"
+                    autoFocus
+                    defaultValue={defaultValue}
+                    type="text"
+                  />
+                </>
               )}
               <button type="submit">
                 <i className="far fa-check-circle"></i>
@@ -80,8 +88,22 @@ export default class EditableUserInfo extends Component {
           </>
         ) : (
           <>
-            <p>{defaultValue}</p>
-            <i onClick={this.handleEditMode} className="fas fa-pencil-alt"></i>
+            {" "}
+            <p className="Category__Label">
+              {category !== "biography"
+                ? `${HelperFunctions.capitalCaseName(category, "_")}:`
+                : ""}
+            </p>
+            <p>
+              {defaultValue ? `${defaultValue}` : "update your information!"}
+            </p>
+            {this.props.editModeEnabled ? (
+              <i
+                onClick={this.handleEditMode}
+                className="fas fa-pencil-alt"></i>
+            ) : (
+              ""
+            )}
           </>
         )}
       </div>

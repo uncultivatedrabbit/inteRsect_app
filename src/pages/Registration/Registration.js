@@ -4,16 +4,21 @@ import VerificationService from "../../services/verification-service";
 import AuthApiService from "../../services/auth-api-service";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./Registration.scss";
+import Context from "../../Context";
 
 export default class Registration extends Component {
+  static contextType = Context;
+
   state = { error: null };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { full_name, email, password, verification } = e.target;
-    const validPassword = VerificationService.verifyValidPassword(password.value)
-    if (validPassword !== "Valid Password"){
-      this.setState({error: validPassword})
+    const validPassword = VerificationService.verifyValidPassword(
+      password.value
+    );
+    if (validPassword !== "Valid Password") {
+      this.setState({ error: validPassword });
       return;
     }
     // verify that the passwords match before submitting to the server
@@ -32,8 +37,8 @@ export default class Registration extends Component {
       full_name.value = "";
       password.value = "";
       email.value = "";
-      // add something to let the login page know the registration was successful
-      
+     
+      this.context.setRedirectedFromReg(true);
       this.props.history.push("/login");
 
       this.setState({ error: null });
@@ -52,7 +57,6 @@ export default class Registration extends Component {
           </Link>
         </header>
         <form className="Reg__Form" onSubmit={this.handleSubmit}>
-          {/* display errors to the UI */}
           <div role="alert">{error && <ErrorMessage error={error} />}</div>
           <div className="Input__Container">
             <label htmlFor="Reg__Full__Name">

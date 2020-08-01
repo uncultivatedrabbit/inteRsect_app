@@ -24,6 +24,10 @@ a {
   text-decoration: none;
   color: $mainDark;
   display: block;
+
+  &:hover{
+    background-color: $mainHoverGreen;
+  }
 }
 
 ul {
