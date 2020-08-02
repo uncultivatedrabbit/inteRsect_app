@@ -68,7 +68,7 @@ export default class UserAccount extends Component {
               <section className="Projects__Container">
                 <h2>{currentUserProfile.full_name}'s Projects</h2>
                 <div className="Projects">
-                  <Projects />
+                  <Projects ownerId={currentUserProfile.id} />
                 </div>
               </section>
             </>

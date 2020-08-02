@@ -70,7 +70,7 @@ export default class HomePage extends Component {
         <section className="Projects__Container">
           <h2>Projects</h2>
           <div className="Projects">
-            <Projects />
+            <Projects ownerId={currentUser.id}/>
           </div>
           <Link to="/add_project">Add New Project</Link>
         </section>

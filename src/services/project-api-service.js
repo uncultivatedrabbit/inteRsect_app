@@ -5,7 +5,7 @@ const ProjectApiService = {
   getProjectsByTopic(filterTerm, dropdownTerm) {
     console.log(filterTerm, dropdownTerm);
   },
-  getProjectsByAuthorId(authorId) {
+  getProjectsByOwnerId(authorId) {
    
   },
   getProjectById(projectId) {
