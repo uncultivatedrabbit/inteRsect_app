@@ -1,3 +1,56 @@
+@import "../../utils/scss/variables.scss";
+
 .User__Account {
-  padding: 1.5em;
+  .Profile__Header__Container {
+    background-color: #747d8c;
+    color: $mainWhite;
+    text-align: center;
+    header {
+      font-size: 2rem;
+
+      h1 {
+        display: inline-block;
+        border: 2px $mainWhite dashed;
+        padding: 0.4em 0.8em;
+        border-radius: 50px;
+        background-color: $mainGreen;
+      }
+    }
+    h2 {
+      letter-spacing: 2px;
+      margin: 0;
+    }
+    .User__Info {
+      padding-bottom: 1em;
+      .Category__Label {
+        color: #eccc68;
+        font-weight: 700;
+        margin: 0 0.2em;
+      }
+    }
+  }
+  .Profile__Details__Container {
+    text-align: center;
+  }
+  .Projects__Container {
+    text-align: center;
+    margin: 0 1em;
+    max-width: 600px;
+    a {
+      @include button;
+      text-align: center;
+      &:hover {
+        background-color: $mainHoverGreen;
+      }
+    }
+    .Project {
+      a {
+        @include button;
+        padding: 0.1em;
+        &:hover {
+          background-color: $mainHoverGreen;
+        }
+      }
+    }
+  }
 }

@@ -21,7 +21,7 @@ export default class AddProjectPage extends Component {
     if (!token) {
       this.context.setIsLoggedIn(false);
     } else {
-      const { user_id, sub } = parseJwt(token);
+      const { user_id} = parseJwt(token);
       this.context.setIsLoggedIn(true);
       UserApiService.getUserById(user_id).then((data) => {
         this.context.setUser(data);
@@ -58,6 +58,7 @@ export default class AddProjectPage extends Component {
             </React.Fragment>
           );
         }
+        return false;
       });
     }
   }
@@ -77,7 +78,6 @@ export default class AddProjectPage extends Component {
       dropdown_selection,
       IRB__Status,
       subspecialties,
-      file,
     } = e.target;
     if (!subspecialties) {
       ProjectApiService.postProject({
@@ -87,7 +87,6 @@ export default class AddProjectPage extends Component {
         IrbStatus: IRB__Status.value,
         specialty: dropdown_selection.value,
         subspecialty: null,
-        file: null,
       });
     } else {
       ProjectApiService.postProject({
@@ -97,7 +96,6 @@ export default class AddProjectPage extends Component {
         IrbStatus: IRB__Status.value,
         specialty: dropdown_selection.value,
         subspecialty: subspecialties.value,
-        file: null,
       });
     }
   };
@@ -128,8 +126,6 @@ export default class AddProjectPage extends Component {
               <option value="accepted">Accepted</option>
               <option value="accepted">Exempt</option>
             </select>
-            <label htmlFor="New__Proj__File">Working Manuscript</label>
-            <input type="file" accept=".pdf" name="file" id="New__Proj__File" />
             <input type="submit" value="Submit" />
           </form>
         </div>

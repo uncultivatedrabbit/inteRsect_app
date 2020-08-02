@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Context from "../../Context";
-import UserApiService from "../../services/user-api-service";
-import Project from "../../components/Project/Project";
+import Projects from "../../components/Projects/Projects";
 import EditableUserInfo from "../../components/EditableUserInfo/EditableUserInfo";
 import { Link } from "react-router-dom";
 import HelperFunctions from "../../utils/js/helpers";
@@ -71,7 +70,7 @@ export default class HomePage extends Component {
         <section className="Projects__Container">
           <h2>Projects</h2>
           <div className="Projects">
-            <Project />
+            <Projects />
           </div>
           <Link to="/add_project">Add New Project</Link>
         </section>

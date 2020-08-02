@@ -27,7 +27,7 @@ export default class EditableUserInfo extends Component {
     const category = this.props.currentUserInfo.split(":")[0];
     UserApiService.updateUser(userId, category, editedInfo.value);
     this.context.updateUser(category, editedInfo.value);
-    
+
     this.setState({ isBeingEdited: false });
   };
 
@@ -76,7 +76,7 @@ export default class EditableUserInfo extends Component {
                     name="editedInfo"
                     autoFocus
                     defaultValue={defaultValue}
-                    type="text"
+                    type={category === "email" ? "email" : "text"}
                   />
                 </>
               )}
@@ -99,6 +99,7 @@ export default class EditableUserInfo extends Component {
             </p>
             {this.props.editModeEnabled ? (
               <i
+                id={`${category}-icon`}
                 onClick={this.handleEditMode}
                 className="fas fa-pencil-alt"></i>
             ) : (

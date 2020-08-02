@@ -86,7 +86,7 @@ const MedicalSpecialties = [
     ],
   },
   {
-    "Medical genetics": [
+    "Medical Genetics": [
       "Biochemical Genetics",
       "Clinical Cytogenetics",
       "Clinical Genetics",
@@ -167,7 +167,7 @@ const MedicalSpecialties = [
     ],
   },
   {
-    "Physical Medicine and rehabilitation": [
+    "Physical Medicine and Rehabilitation": [
       "Brain Injury Medicine",
       "Hospice and Palliative Medicine",
       "Neuromuscular Medicine",
@@ -206,7 +206,7 @@ const MedicalSpecialties = [
     "Radiation Oncology": ["Hospice and Palliative Medicine", "Pain Medicine"],
   },
   {
-    surgery: [
+    Surgery: [
       "Colon and Rectal Surgery",
       "General Surgery",
       "Surgical Critical Care",

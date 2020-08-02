@@ -19,7 +19,7 @@ export default class LandingPage extends Component {
     if (!token) {
       this.context.setIsLoggedIn(false);
     } else {
-      const { user_id, sub } = parseJwt(token);
+      const { user_id } = parseJwt(token);
       this.context.setIsLoggedIn(true);
       UserApiService.getUserById(user_id).then((data) => {
         this.context.setUser(data);
