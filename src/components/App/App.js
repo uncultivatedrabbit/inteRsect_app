@@ -10,6 +10,8 @@ import ProjectPage from "../../pages/ProjectPage/ProjectPage";
 import Context from "../../Context";
 import AddProjectPage from "../../pages/AddProjectPage/AddProjectPage";
 import MedicalSpecialties from "../../utils/js/MedicalSpecialties/MedialSpecialties";
+import PrivateRoute from "../Utils/PrivateRoute";
+import PublicRoute from "../Utils/PublicRoute";
 
 class App extends Component {
   state = {
@@ -19,6 +21,7 @@ class App extends Component {
     currentPage: {},
     currentSpecialty: "",
     redirectedFromReg: false,
+    projectSubmissionSuccess: false,
     setUser: (data) => this.setState({ currentUser: data }),
     clearUser: () => this.setState({ currentUser: {} }),
     setCurrentPage: (data) => this.setState({ currentPage: data }),
@@ -27,6 +30,8 @@ class App extends Component {
     setCurrentSpecialty: (data) => this.setState({ currentSpecialty: data }),
     clearCurrentSpecialty: () => this.setState({ currentSpecialty: "" }),
     setRedirectedFromReg: (bool) => this.setState({ redirectedFromReg: bool }),
+    setProjectSubmissionSuccess: (bool) =>
+      this.setState({ projectSubmissionSuccess: bool }),
     updateUser: (category, data) => {
       this.setState({
         currentUser: {
@@ -43,12 +48,12 @@ class App extends Component {
         <main>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route path="/user/:userId" component={UserAccount} />
-            <Route path="/register" component={Registration} />
-            <Route path="/login" component={Login} />
-            <Route path="/search" component={SearchPage} />
-            <Route path="/project/:projectId" component={ProjectPage} />
-            <Route path="/add_project" component={AddProjectPage} />
+            <PrivateRoute path="/user/:userId" component={UserAccount} />
+            <PublicRoute path="/register" component={Registration} />
+            <PublicRoute path="/login" component={Login} />
+            <PrivateRoute path="/search" component={SearchPage} />
+            <PrivateRoute path="/project/:projectId" component={ProjectPage} />
+            <PrivateRoute path="/add_project" component={AddProjectPage} />
             <Route component={ErrorPage} />
           </Switch>
         </main>

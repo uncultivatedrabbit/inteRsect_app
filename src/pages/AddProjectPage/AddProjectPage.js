@@ -21,7 +21,7 @@ export default class AddProjectPage extends Component {
     if (!token) {
       this.context.setIsLoggedIn(false);
     } else {
-      const { user_id} = parseJwt(token);
+      const { user_id } = parseJwt(token);
       this.context.setIsLoggedIn(true);
       UserApiService.getUserById(user_id).then((data) => {
         this.context.setUser(data);
@@ -71,10 +71,10 @@ export default class AddProjectPage extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { id } = this.context.currentUser;
-
     const {
       title,
       summary,
+      support_needed,
       dropdown_selection,
       IRB__Status,
       subspecialties,
@@ -87,6 +87,7 @@ export default class AddProjectPage extends Component {
         IrbStatus: IRB__Status.value,
         specialty: dropdown_selection.value,
         subspecialty: null,
+        support_needed: support_needed.value,
       });
     } else {
       ProjectApiService.postProject({
@@ -96,8 +97,11 @@ export default class AddProjectPage extends Component {
         IrbStatus: IRB__Status.value,
         specialty: dropdown_selection.value,
         subspecialty: subspecialties.value,
+        support_needed: support_needed.value,
       });
     }
+    this.context.setProjectSubmissionSuccess(true);
+    this.props.history.push("/");
   };
   render() {
     return (
@@ -114,6 +118,15 @@ export default class AddProjectPage extends Component {
               required
               defaultValue={""}
               id="New__Proj__Summary"
+            />
+            <label htmlFor="New__Proj__Support">Support Needed*</label>
+            <textarea
+              name="support_needed"
+              required
+              defaultValue={
+                "Let people know what kind of support this project needs"
+              }
+              id="New__Proj__Support"
             />
             <label htmlFor="New__Proj__Medical_Specialties">Specialties*</label>
             <DropdownInput required={true} />

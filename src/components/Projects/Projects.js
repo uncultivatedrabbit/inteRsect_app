@@ -8,6 +8,9 @@ import parseJwt from "../../utils/js/parseJwt";
 import UserApiService from "../../services/user-api-service";
 
 export default class Project extends Component {
+  state = {
+    projects: "",
+  };
   static defaultProps = {
     match: { params: {} },
   };
@@ -26,14 +29,50 @@ export default class Project extends Component {
       this.context.setIsLoggedIn(true);
       UserApiService.getUserById(user_id).then((data) => {
         this.context.setUser(data);
+        this.handleGetProjects();
       });
     }
   }
 
-  renderProjects() {
-    console.log(this.props.ownerId)
-   ProjectApiService.getProjectsByOwnerId();
+  handleGetProjects() {
+    const ownerId = this.props.ownerId;
+    ProjectApiService.getProjectsByOwnerId(ownerId).then((projects) => {
+      this.setState({ projects: projects });
+    });
   }
+
+  renderProjects = () => {
+    const { projects } = this.state;
+    if (projects) {
+      return projects.map((project, i) => {
+        return (
+          <div className="Project__Tile" key={project.title + i}>
+            <h2>{project.title}</h2>
+            <p>{}</p>
+            <p>
+              {project.medical_subspecialty.length > 1 ? (
+                <>
+                  <span className="Specialty__Pill">
+                    {project.medical_specialty}{" "}
+                  </span>
+                  <span className="Specialty__Pill">
+                    {project.medical_subspecialty}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="Specialty__Pill">
+                    {project.medical_specialty}{" "}
+                  </span>
+                </>
+              )}
+            </p>
+            <Link to={`/project/${project.id}`}>Read More</Link>
+          </div>
+        );
+      });
+    }
+  };
 
   render() {
     return <>{this.renderProjects()}</>;

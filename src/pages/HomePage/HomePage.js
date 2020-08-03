@@ -16,10 +16,16 @@ export default class HomePage extends Component {
     this.setState({ editModeEnabled: !this.state.editModeEnabled });
   }
 
+
   render() {
-    const { currentUser } = this.context;
+    const { currentUser, projectSubmissionSuccess } = this.context;
     return (
       <div className="Home__Page">
+        {projectSubmissionSuccess ? (
+          <div className="Project__Success">Project Saved!</div>
+        ) : (
+          ""
+        )}
         <section className="Profile__Header__Container">
           <header>
             <h1 id="User__Logo">
@@ -30,7 +36,10 @@ export default class HomePage extends Component {
           </header>
           <h2>
             Welcome{", "}
-            {currentUser.full_name ? HelperFunctions.capitalCaseName(currentUser.full_name, " ") : ""}!
+            {currentUser.full_name
+              ? HelperFunctions.capitalCaseName(currentUser.full_name, " ")
+              : ""}
+            !
           </h2>
           <EditableUserInfo
             editModeEnabled={this.state.editModeEnabled}
@@ -47,20 +56,25 @@ export default class HomePage extends Component {
             currentUserInfo={`academic_level: ${currentUser.academic_level}`}
             {...this.props}
           />
-          {this.state.editModeEnabled ? <button
-            onClick={() => this.handleEditMode()}
-            id="edit-btn"
-            className="Edit__Button">
-            Finished Editing
-          </button> : <button
-            onClick={() => this.handleEditMode()}
-            id="edit-btn"
-            className="Edit__Button">
-            Edit
-          </button>}
+          {this.state.editModeEnabled ? (
+            <button
+              onClick={() => this.handleEditMode()}
+              id="edit-btn"
+              className="Edit__Button">
+              Finished Editing
+            </button>
+          ) : (
+            <button
+              onClick={() => this.handleEditMode()}
+              id="edit-btn"
+              className="Edit__Button">
+              Edit
+            </button>
+          )}
         </section>
         <section className="Profile__Details__Container">
           <h2>Biography</h2>
+          <hr className="Header__Underline"/>
           <EditableUserInfo
             editModeEnabled={this.state.editModeEnabled}
             currentUserInfo={`biography: ${currentUser.biography}`}
@@ -69,8 +83,9 @@ export default class HomePage extends Component {
         </section>
         <section className="Projects__Container">
           <h2>Projects</h2>
+          <hr className="Header__Underline"/>
           <div className="Projects">
-            <Projects ownerId={currentUser.id}/>
+            <Projects ownerId={currentUser.id} />
           </div>
           <Link to="/add_project">Add New Project</Link>
         </section>

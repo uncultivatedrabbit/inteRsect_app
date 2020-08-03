@@ -5,31 +5,29 @@ const ProjectApiService = {
   getProjectsByTopic(filterTerm, dropdownTerm) {
     console.log(filterTerm, dropdownTerm);
   },
-  getProjectsByOwnerId(authorId) {
-   
+  getProjectsByOwnerId(ownerId) {
+    return fetch(`${config.API_ENDPOINT}/api/users/${ownerId}/projects`).then(
+      (res) => {
+        if (!res.ok) {
+          return res.json().then((e) => Promise.reject(e));
+        } else {
+          return res.json();
+        }
+      }
+    );
   },
   getProjectById(projectId) {
-    return fetch(
-      `https://jsonplaceholder.typicode.com/posts/${projectId}`
-    ).then((res) => {
-      if (!res.ok) {
-        return res.json().then((e) => Promise.reject(e));
-      } else {
-        return res.json();
+    return fetch(`${config.API_ENDPOINT}/api/projects/${projectId}`).then(
+      (res) => {
+        if (!res.ok) {
+          return res.json().then((e) => Promise.reject(e));
+        } else {
+          return res.json();
+        }
       }
-    });
+    );
   },
-  getProjectAuthors(projectAuthorId) {
-    return fetch(
-      `https://jsonplaceholder.typicode.com/users/${projectAuthorId}`
-    ).then((res) => {
-      if (!res.ok) {
-        return res.json().then((e) => Promise.reject(e));
-      } else {
-        return res.json();
-      }
-    });
-  },
+  getProjectAuthors(projectAuthorId) {},
   getProjectComments(projectId) {},
   postProject(project) {
     return fetch(`${config.API_ENDPOINT}/api/projects`, {

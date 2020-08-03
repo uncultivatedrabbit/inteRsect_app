@@ -1,6 +1,13 @@
 @import "../../utils/scss/variables.scss";
 
 .Home__Page {
+  .Project__Success {
+    background: $successGreen;
+    color: $mainWhite;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
   .Profile__Header__Container {
     background-color: #747d8c;
     color: $mainWhite;
@@ -16,7 +23,7 @@
         background-color: $mainGreen;
       }
     }
-    h2{
+    h2 {
       letter-spacing: 2px;
     }
     #edit-btn {
@@ -35,7 +42,8 @@
   }
   .Projects__Container {
     text-align: center;
-    margin: 0 1em;
+    padding: 1em;
+    margin: 0 auto;
     max-width: 600px;
     a {
       @include button;

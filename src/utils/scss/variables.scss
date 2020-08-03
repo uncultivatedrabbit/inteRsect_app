@@ -14,6 +14,10 @@ $headerFont: "Dosis", Sans-Serif;
   align-items: center;
 }
 
+@mixin header-underline {
+  
+}
+
 @mixin button {
   background-color: $mainGreen;
   color: $mainWhite;
