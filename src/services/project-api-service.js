@@ -10,7 +10,7 @@ const ProjectApiService = {
       }
     });
   },
-  getProjectsByTopic(specialty, subspecialty) {
+  getProjectsBySpecialty(specialty, subspecialty) {
     let params;
     if (subspecialty !== null) {
       params = {
@@ -23,7 +23,7 @@ const ProjectApiService = {
       };
     }
     return fetch(
-      `${config.API_ENDPOINT}/api/projects/?search` +
+      `${config.API_ENDPOINT}/api/projects/search?` +
         new URLSearchParams(params)
     ).then((res) => {
       if (!res.ok) {
