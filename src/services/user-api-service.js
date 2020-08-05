@@ -16,7 +16,6 @@ const UserApiService = {
       }
     });
   },
-  getUserProjects(userId) {},
   updateUser(userId, category, updatedInfo) {
     return fetch(`${config.API_ENDPOINT}/api/users/${userId}`, {
       method: "PATCH",

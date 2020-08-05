@@ -16,13 +16,24 @@ export default class HomePage extends Component {
     this.setState({ editModeEnabled: !this.state.editModeEnabled });
   }
 
+  componentWillUnmount() {
+    this.context.setProjectSubmissionSuccess(false);
+    this.context.setDeleteSuccessful(false);
+  }
 
   render() {
-    const { currentUser, projectSubmissionSuccess } = this.context;
+    const {
+      currentUser,
+      projectSubmissionSuccess,
+      deleteSuccessful,
+    } = this.context;  
     return (
+      
       <div className="Home__Page">
         {projectSubmissionSuccess ? (
           <div className="Project__Success">Project Saved!</div>
+        ) : deleteSuccessful ? (
+          <div className="Delete__Success">Project Deleted!</div>
         ) : (
           ""
         )}
@@ -74,7 +85,7 @@ export default class HomePage extends Component {
         </section>
         <section className="Profile__Details__Container">
           <h2>Biography</h2>
-          <hr className="Header__Underline"/>
+          <hr className="Header__Underline" />
           <EditableUserInfo
             editModeEnabled={this.state.editModeEnabled}
             currentUserInfo={`biography: ${currentUser.biography}`}
@@ -83,7 +94,7 @@ export default class HomePage extends Component {
         </section>
         <section className="Projects__Container">
           <h2>Projects</h2>
-          <hr className="Header__Underline"/>
+          <hr className="Header__Underline" />
           <div className="Projects">
             <Projects ownerId={currentUser.id} />
           </div>

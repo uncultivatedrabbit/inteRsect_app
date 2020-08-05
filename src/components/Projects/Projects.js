@@ -7,6 +7,7 @@ import TokenService from "../../services/token-service";
 import parseJwt from "../../utils/js/parseJwt";
 import UserApiService from "../../services/user-api-service";
 
+
 export default class Project extends Component {
   state = {
     projects: "",
@@ -36,9 +37,17 @@ export default class Project extends Component {
 
   handleGetProjects() {
     const ownerId = this.props.ownerId;
-    ProjectApiService.getProjectsByOwnerId(ownerId).then((projects) => {
-      this.setState({ projects: projects });
-    });
+    if (ownerId) {
+      ProjectApiService.getProjectsByOwnerId(ownerId)
+        .then((projects) => {
+          this.setState({ projects: projects });
+        })
+        .catch((error) => {
+          return false;
+        });
+    } else {
+      this.context.setError("This page doesn't exist")
+    }
   }
 
   renderProjects = () => {
@@ -48,7 +57,6 @@ export default class Project extends Component {
         return (
           <div className="Project__Tile" key={project.title + i}>
             <h2>{project.title}</h2>
-            <p>{}</p>
             <p>
               {project.medical_subspecialty.length > 1 ? (
                 <>

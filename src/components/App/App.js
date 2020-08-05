@@ -23,6 +23,9 @@ class App extends Component {
     currentSubSpecialty: "",
     redirectedFromReg: false,
     projectSubmissionSuccess: false,
+    deleteSuccessful: false,
+    error: null,
+    setError: (error) => this.setState({error: error}),
     setUser: (data) => this.setState({ currentUser: data }),
     clearUser: () => this.setState({ currentUser: {} }),
     setCurrentPage: (data) => this.setState({ currentPage: data }),
@@ -33,6 +36,7 @@ class App extends Component {
     setCurrentSubspecialty: (data) => this.setState({ currentSubspecialty: data }),
     clearCurrentSubspecialty: () => this.setState({ currentSubspecialty: "" }),
     setRedirectedFromReg: (bool) => this.setState({ redirectedFromReg: bool }),
+    setDeleteSuccessful: (bool) => this.setState({ deleteSuccessful: bool }),
     setProjectSubmissionSuccess: (bool) =>
       this.setState({ projectSubmissionSuccess: bool }),
     updateUser: (category, data) => {

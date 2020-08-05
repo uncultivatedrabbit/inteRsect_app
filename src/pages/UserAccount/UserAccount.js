@@ -4,6 +4,7 @@ import "./UserAccount.scss";
 import Navbar from "../../components/Navbar/Navbar";
 import Context from "../../Context";
 import UserApiService from "../../services/user-api-service";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 export default class UserAccount extends Component {
   state = {
@@ -16,12 +17,12 @@ export default class UserAccount extends Component {
 
   componentDidMount() {
     const userId = this.props.match.params.userId;
-
     UserApiService.getUserById(userId)
       .then((data) => {
+        this.context.setError("");
         this.setState({ currentUserProfile: data });
       })
-      .catch((error) => this.setState(error));
+      .catch((error) => this.setState({ error: "That page doesn't exist!" }));
   }
 
   render() {
@@ -31,8 +32,8 @@ export default class UserAccount extends Component {
       <>
         <Navbar {...this.props} />
         <div className="User__Account">
-          {error ? (
-            <h1>{error}</h1>
+          {error || this.context.error ? (
+            <ErrorMessage error={error || this.context.error} />
           ) : (
             <>
               <section className="Profile__Header__Container">

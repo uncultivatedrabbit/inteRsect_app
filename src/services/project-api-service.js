@@ -1,8 +1,11 @@
 import config from "../config";
+import TokenService from "./token-service";
 
 const ProjectApiService = {
   getAllProjects() {
-    return fetch(`${config.API_ENDPOINT}/api/projects/`).then((res) => {
+    return fetch(`${config.API_ENDPOINT}/api/projects/`, {
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
+    }).then((res) => {
       if (!res.ok) {
         return res.json().then((e) => Promise.reject(e));
       } else {
@@ -24,10 +27,13 @@ const ProjectApiService = {
     }
     return fetch(
       `${config.API_ENDPOINT}/api/projects/search?` +
-        new URLSearchParams(params)
+        new URLSearchParams(params),
+      {
+        headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
+      }
     ).then((res) => {
       if (!res.ok) {
-        console.log(res)
+        console.log(res);
         return res.json().then((e) => Promise.reject(e));
       } else {
         return res.json();
@@ -35,34 +41,34 @@ const ProjectApiService = {
     });
   },
   getProjectsByOwnerId(ownerId) {
-    return fetch(`${config.API_ENDPOINT}/api/users/${ownerId}/projects`).then(
-      (res) => {
-        if (!res.ok) {
-          return res.json().then((e) => Promise.reject(e));
-        } else {
-          return res.json();
-        }
+    return fetch(`${config.API_ENDPOINT}/api/users/${ownerId}/projects`, {
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
+    }).then((res) => {
+      if (!res.ok) {
+        return res.json().then((e) => Promise.reject(e));
+      } else {
+        return res.json();
       }
-    );
+    });
   },
   getProjectById(projectId) {
-    return fetch(`${config.API_ENDPOINT}/api/projects/${projectId}`).then(
-      (res) => {
-        if (!res.ok) {
-          return res.json().then((e) => Promise.reject(e));
-        } else {
-          return res.json();
-        }
+    return fetch(`${config.API_ENDPOINT}/api/projects/${projectId}`, {
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
+    }).then((res) => {
+      if (!res.ok) {
+        return res.json().then((e) => Promise.reject(e));
+      } else {
+        return res.json();
       }
-    );
+    });
   },
-  getProjectAuthors(projectAuthorId) {},
   getProjectComments(projectId) {},
   postProject(project) {
     return fetch(`${config.API_ENDPOINT}/api/projects`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(project),
     }).then((res) => {
@@ -74,6 +80,21 @@ const ProjectApiService = {
     });
   },
   postComment(projectId, text, author) {},
+  deleteProject(projectId) {
+    return fetch(`${config.API_ENDPOINT}/api/projects/${projectId}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) => {
+      if (!res.ok) {
+        return res.json().then((e) => Promise.reject(e));
+      } else {
+        return res.json();
+      }
+    });
+  },
 };
 
 export default ProjectApiService;
