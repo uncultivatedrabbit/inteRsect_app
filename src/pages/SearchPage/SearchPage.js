@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./SearchPage.scss";
-import AutocompleteInput from "../../components/AutocompleteInput/AutocompleteInput";
 import ProjectService from "../../services/project-api-service";
 import DropdownInput from "../../components/DropdownInput/DropdownInput";
 import Context from "../../Context";
 import TokenService from "../../services/token-service";
 import parseJwt from "../../utils/js/parseJwt";
 import UserApiService from "../../services/user-api-service";
+import SubspecialtyDropdownInput from "../../components/SubspecialtyDropdownInput/SubspecialtyDropdownInput";
+
 
 export default class SearchPage extends Component {
+  // initialize all the possible medical specialties as the global state object
+  state = {
+    filteredSpecialties: this.context.medicalSpecialties,
+  };
+
   static contextType = Context;
 
   componentDidMount() {
@@ -28,19 +34,15 @@ export default class SearchPage extends Component {
     }
   }
 
-  // initialize all the possible medical specialties as the global state object
-  state = {
-    filteredSpecialties: this.context.medicalSpecialties,
-    updateFilteredSpecialties: {},
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
-    const { filter_term, dropdown_selection } = e.target;
-    ProjectService.getProjectsByTopic(
-      filter_term.value,
-      dropdown_selection.value
-    );
+    const specialty = this.context.currentSpecialty;
+    let subspecialty = this.context.currentSubspecialty || null;
+    if (specialty === "All") {
+      ProjectService.getAllProjects().then(data => console.log(data));
+    } else {
+      ProjectService.getProjectsByTopic(specialty, subspecialty);
+    }
   };
 
   render() {
@@ -48,17 +50,15 @@ export default class SearchPage extends Component {
       <>
         <Navbar {...this.props} />
         <div className="SearchPage">
-          <h1>Search page</h1>
+          <h1>Search Research Projects</h1>
           <section className="Search__Sidebar"></section>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="Search__Bar">Search By Keyword</label>
-            <AutocompleteInput
-              medicalSpecialties={this.state.filteredSpecialties}
-            />
-            <label htmlFor="med__dropdown__selection">Specialties:</label>
-            <DropdownInput includeAll={true} />
+            <label htmlFor="dropdown_selection">Medical Specialties:*</label>
+            <DropdownInput required={true} includeAll={true} />
+            <SubspecialtyDropdownInput addLabel={true} />
             <input type="submit" value="Search" />
           </form>
+          <section className="Search__Results"></section>
         </div>
       </>
     );

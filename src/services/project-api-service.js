@@ -1,9 +1,38 @@
 import config from "../config";
 
 const ProjectApiService = {
-  getAllProjects() {},
-  getProjectsByTopic(filterTerm, dropdownTerm) {
-    console.log(filterTerm, dropdownTerm);
+  getAllProjects() {
+    return fetch(`${config.API_ENDPOINT}/api/projects/`).then((res) => {
+      if (!res.ok) {
+        return res.json().then((e) => Promise.reject(e));
+      } else {
+        return res.json();
+      }
+    });
+  },
+  getProjectsByTopic(specialty, subspecialty) {
+    let params;
+    if (subspecialty !== null) {
+      params = {
+        medical_specialty: specialty,
+        medical_subspecialty: subspecialty,
+      };
+    } else {
+      params = {
+        medical_specialty: specialty,
+      };
+    }
+    return fetch(
+      `${config.API_ENDPOINT}/api/projects/?search` +
+        new URLSearchParams(params)
+    ).then((res) => {
+      if (!res.ok) {
+        console.log(res)
+        return res.json().then((e) => Promise.reject(e));
+      } else {
+        return res.json();
+      }
+    });
   },
   getProjectsByOwnerId(ownerId) {
     return fetch(`${config.API_ENDPOINT}/api/users/${ownerId}/projects`).then(

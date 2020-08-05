@@ -18,6 +18,11 @@
     border: none;
     margin: 0;
     padding: 0;
+
+    #biography-confirm,
+    #biography-undo {
+      color: $mainDark;
+    }
   }
   p {
     font-size: 18px;
@@ -29,20 +34,20 @@
     margin-left: 1em;
     cursor: pointer;
     color: $mainWhite;
-    &:focus{
+    &:focus {
       outline: none;
     }
   }
   .fa-pencil-alt {
     font-size: 0.8rem;
   }
-  #biography-icon{
+  #biography-icon {
     color: $mainDark;
   }
   input {
     border: none;
     font-size: 18px;
-    margin: 1em  0 1em 1em;
+    margin: 1em 0 1em 1em;
     font-family: $mainFont;
     width: 100%;
     word-wrap: break-word;

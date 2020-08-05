@@ -81,9 +81,9 @@ export default class EditableUserInfo extends Component {
                 </>
               )}
               <button type="submit">
-                <i className="far fa-check-circle"></i>
+                <i id={`${category}-confirm`} className="far fa-check-circle"></i>
               </button>
-              <i onClick={this.handleEditMode} className="fas fa-times"></i>
+              <i id={`${category}-undo`} onClick={this.handleEditMode} className="fas fa-times"></i>
             </form>
           </>
         ) : (

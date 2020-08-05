@@ -19,7 +19,8 @@ class App extends Component {
     isLoggedIn: false,
     currentUser: {},
     currentPage: {},
-    currentSpecialty: "",
+    currentSpecialty: "All",
+    currentSubSpecialty: "",
     redirectedFromReg: false,
     projectSubmissionSuccess: false,
     setUser: (data) => this.setState({ currentUser: data }),
@@ -29,6 +30,8 @@ class App extends Component {
     setIsLoggedIn: (bool) => this.setState({ isLoggedIn: bool }),
     setCurrentSpecialty: (data) => this.setState({ currentSpecialty: data }),
     clearCurrentSpecialty: () => this.setState({ currentSpecialty: "" }),
+    setCurrentSubspecialty: (data) => this.setState({ currentSubspecialty: data }),
+    clearCurrentSubspecialty: () => this.setState({ currentSubspecialty: "" }),
     setRedirectedFromReg: (bool) => this.setState({ redirectedFromReg: bool }),
     setProjectSubmissionSuccess: (bool) =>
       this.setState({ projectSubmissionSuccess: bool }),

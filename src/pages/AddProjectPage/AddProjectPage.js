@@ -4,10 +4,10 @@ import ProjectApiService from "../../services/project-api-service";
 import "./AddProjectPage.scss";
 import Context from "../../Context";
 import DropdownInput from "../../components/DropdownInput/DropdownInput";
-import MedicalSpecialties from "../../utils/js/MedicalSpecialties/MedialSpecialties";
 import TokenService from "../../services/token-service";
 import parseJwt from "../../utils/js/parseJwt";
 import UserApiService from "../../services/user-api-service";
+import SubspecialtyDropdownInput from "../../components/SubspecialtyDropdownInput/SubspecialtyDropdownInput";
 
 export default class AddProjectPage extends Component {
   static contextType = Context;
@@ -25,40 +25,6 @@ export default class AddProjectPage extends Component {
       this.context.setIsLoggedIn(true);
       UserApiService.getUserById(user_id).then((data) => {
         this.context.setUser(data);
-      });
-    }
-  }
-  /**
-   * @function dynamically renders subspecialties
-   * depending on user input for specialty dropdown input
-   * by checking against list of medical specialties in context
-   */
-  handleRenderSubspecialtyMenu() {
-    const selectedSpecialty = this.context.currentSpecialty;
-    if (selectedSpecialty) {
-      return MedicalSpecialties.map((specialty, index) => {
-        if (
-          selectedSpecialty === Object.keys(specialty)[0] &&
-          Object.values(specialty)[0] !== null
-        ) {
-          const subspecialties = Object.values(specialty)[0];
-          return (
-            <React.Fragment key={specialty + index}>
-              <label htmlFor="subspecialties">Subspecialty:</label>
-              <select name="subspecialties" id="Subspecialties">
-                <option key={"none"} value="">
-                  ----------
-                </option>
-                {subspecialties.map((sub, i) => (
-                  <option key={i + 1} value={sub}>
-                    {sub}
-                  </option>
-                ))}
-              </select>
-            </React.Fragment>
-          );
-        }
-        return false;
       });
     }
   }
@@ -130,14 +96,14 @@ export default class AddProjectPage extends Component {
             />
             <label htmlFor="New__Proj__Medical_Specialties">Specialties*</label>
             <DropdownInput required={true} />
-            {this.handleRenderSubspecialtyMenu()}
+            <SubspecialtyDropdownInput />
             <label htmlFor="IRB__Status">IRB Status*</label>
             <select required name="IRB__Status">
               <option value="">--------</option>
-              <option value="accepted">Need to Apply</option>
-              <option value="accepted">Submitted</option>
-              <option value="accepted">Accepted</option>
-              <option value="accepted">Exempt</option>
+              <option value="Need to Apply">Need to Apply</option>
+              <option value="Submitted">Submitted</option>
+              <option value="Accepted">Accepted</option>
+              <option value="Excempt">Exempt</option>
             </select>
             <input type="submit" value="Submit" />
           </form>

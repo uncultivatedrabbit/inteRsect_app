@@ -1,8 +1,0 @@
-// principal investigator OR researcher (project in lieu of author)
-// when setting up project: IRB status (internal review board): boolean -> 3) IRB accepted OR 4) exempt OR 2) submitted OR 1) need to apply
-
-/**
-   * @function dynamically renders subspecialties
-   * depending on user input for specialty dropdown input
-   * by checking against list of medical specialties in context
-   */
