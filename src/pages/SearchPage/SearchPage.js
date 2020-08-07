@@ -22,6 +22,8 @@ export default class SearchPage extends Component {
 
   componentDidMount() {
     this.verifyUserLoggedIn();
+    this.context.setCurrentSpecialty("");
+    this.context.setCurrentSubspecialty("");
   }
   verifyUserLoggedIn() {
     const token = TokenService.getAuthToken();
@@ -45,11 +47,10 @@ export default class SearchPage extends Component {
         this.setState({ searchResults: results, submitted: true })
       );
     } else {
-      ProjectService.getProjectsBySpecialty(
-        specialty,
-        subspecialty
-      ).then((results) =>
-        this.setState({ searchResults: results, submitted: true })
+      ProjectService.getProjectsBySpecialty(specialty, subspecialty).then(
+        (results) => {
+          this.setState({ searchResults: results, submitted: true });
+        }
       );
     }
   };

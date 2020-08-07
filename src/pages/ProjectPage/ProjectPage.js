@@ -8,11 +8,12 @@ import parseJwt from "../../utils/js/parseJwt";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import HelperFunctions from "../../utils/js/helpers";
 import Comments from "../../components/Comments/Comments";
+import AddCommentForm from "../../components/AddCommentForm/AddCommentForm";
 
 export default class ProjectPage extends Component {
   state = {
     error: "",
-    projectComments: '',
+    projectComments: "",
   };
   static defaultProps = { match: { params: {} } };
 
@@ -59,7 +60,7 @@ export default class ProjectPage extends Component {
 
   render() {
     const { currentPage, currentUser } = this.context;
-    const { error} = this.state;
+    const { error } = this.state;
     return (
       <>
         <Navbar {...this.props} />
@@ -102,12 +103,22 @@ export default class ProjectPage extends Component {
               <p>Summary: {currentPage.summary}</p>
               <p>Support Needed: {currentPage.support_needed}</p>
               <div className="Comment__Section">
-                {currentPage.owner && currentPage.owner.id !== currentUser.id ? (
+                {currentPage.owner &&
+                currentPage.owner.id !== currentUser.id ? (
                   <form>Not My Project</form>
                 ) : (
                   ""
                 )}
                 <Comments />
+                {currentPage.owner ? (
+                  currentPage.owner.id !== currentUser.id ? (
+                    <AddCommentForm />
+                  ) : (
+                    ""
+                  )
+                ) : (
+                  ""
+                )}
               </div>
             </>
           )}

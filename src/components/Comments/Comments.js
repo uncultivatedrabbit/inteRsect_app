@@ -25,7 +25,8 @@ function Comment({ comment }) {
 
   return (
     <div className="Nested__Comments">
-      {comment.text}
+      <p>{comment.text}</p>
+      <p>-{comment.owner.full_name}</p>
       {nestedComments}
     </div>
   );

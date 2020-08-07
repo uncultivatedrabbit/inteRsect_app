@@ -89,7 +89,9 @@ const ProjectApiService = {
       }
     });
   },
-  postComment(projectId, text, author) {},
+  postProjectComment(projectId, text, submitterId, parentCommentOwnerId) {
+
+  },
   deleteProject(projectId) {
     return fetch(`${config.API_ENDPOINT}/api/projects/${projectId}`, {
       method: "DELETE",
