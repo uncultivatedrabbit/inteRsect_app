@@ -25,7 +25,8 @@ class App extends Component {
     projectSubmissionSuccess: false,
     deleteSuccessful: false,
     error: null,
-    setError: (error) => this.setState({error: error}),
+    projectComments: '',
+    setError: (error) => this.setState({ error: error }),
     setUser: (data) => this.setState({ currentUser: data }),
     clearUser: () => this.setState({ currentUser: {} }),
     setCurrentPage: (data) => this.setState({ currentPage: data }),
@@ -33,7 +34,8 @@ class App extends Component {
     setIsLoggedIn: (bool) => this.setState({ isLoggedIn: bool }),
     setCurrentSpecialty: (data) => this.setState({ currentSpecialty: data }),
     clearCurrentSpecialty: () => this.setState({ currentSpecialty: "" }),
-    setCurrentSubspecialty: (data) => this.setState({ currentSubspecialty: data }),
+    setCurrentSubspecialty: (data) =>
+      this.setState({ currentSubspecialty: data }),
     clearCurrentSubspecialty: () => this.setState({ currentSubspecialty: "" }),
     setRedirectedFromReg: (bool) => this.setState({ redirectedFromReg: bool }),
     setDeleteSuccessful: (bool) => this.setState({ deleteSuccessful: bool }),
@@ -47,6 +49,7 @@ class App extends Component {
         },
       });
     },
+    setProjectComments: (data) => this.setState({ projectComments: data }),
   };
 
   render() {

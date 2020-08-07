@@ -6,10 +6,13 @@ import TokenService from "../../services/token-service";
 import UserApiService from "../../services/user-api-service";
 import parseJwt from "../../utils/js/parseJwt";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import HelperFunctions from "../../utils/js/helpers";
+import Comments from "../../components/Comments/Comments";
 
 export default class ProjectPage extends Component {
   state = {
     error: "",
+    projectComments: '',
   };
   static defaultProps = { match: { params: {} } };
 
@@ -49,11 +52,14 @@ export default class ProjectPage extends Component {
       .catch((err) =>
         this.setState({ error: "Sorry, that page doesn't exist!" })
       );
+    ProjectApiService.getProjectComments(projectId).then((data) =>
+      this.context.setProjectComments({ projectComments: data })
+    );
   }
 
   render() {
     const { currentPage, currentUser } = this.context;
-    const { error } = this.state;
+    const { error} = this.state;
     return (
       <>
         <Navbar {...this.props} />
@@ -62,8 +68,8 @@ export default class ProjectPage extends Component {
             <ErrorMessage error={error} />
           ) : (
             <>
-              {currentPage.user ? (
-                currentPage.user.id === currentUser.id ? (
+              {currentPage.owner ? (
+                currentPage.owner.id === currentUser.id ? (
                   <>
                     <button onClick={() => this.handleEdit(currentPage.id)}>
                       Edit
@@ -82,7 +88,12 @@ export default class ProjectPage extends Component {
               <hr className="Header__Underline" />
               <h3>
                 Principle Investigator:{" "}
-                {currentPage.user ? currentPage.user.full_name : ""}
+                {currentPage.owner
+                  ? HelperFunctions.capitalCaseName(
+                      currentPage.owner.full_name,
+                      " "
+                    )
+                  : ""}
               </h3>
               <p>
                 Internal Review Board Status:{" "}
@@ -90,6 +101,14 @@ export default class ProjectPage extends Component {
               </p>
               <p>Summary: {currentPage.summary}</p>
               <p>Support Needed: {currentPage.support_needed}</p>
+              <div className="Comment__Section">
+                {currentPage.owner && currentPage.owner.id !== currentUser.id ? (
+                  <form>Not My Project</form>
+                ) : (
+                  ""
+                )}
+                <Comments />
+              </div>
             </>
           )}
         </section>

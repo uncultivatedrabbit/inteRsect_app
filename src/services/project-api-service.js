@@ -62,7 +62,17 @@ const ProjectApiService = {
       }
     });
   },
-  getProjectComments(projectId) {},
+  getProjectComments(projectId) {
+    return fetch(`${config.API_ENDPOINT}/api/projects/${projectId}/comments`, {
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
+    }).then((res) => {
+      if (!res.ok) {
+        return res.json().then((e) => Promise.reject(e));
+      } else {
+        return res.json();
+      }
+    });
+  },
   postProject(project) {
     return fetch(`${config.API_ENDPOINT}/api/projects`, {
       method: "POST",
