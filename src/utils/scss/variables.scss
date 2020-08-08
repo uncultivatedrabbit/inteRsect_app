@@ -1,7 +1,9 @@
 $mainWhite: #fff;
 $mainDark: rgb(27, 26, 29);
-$mainBlue: rgb(34, 82, 255);
+$mainBlue: rgb(68,120,245);
+$hoverBlue: rgb(12, 83, 248);
 $mainGreen: rgb(6, 208, 189);
+$mainGrey: #747d8c;
 $mainRed: #eb4d4b;
 $successGreen: #2ed573;
 $mainHoverGreen:rgba(0, 139, 125, 0.76);
@@ -12,10 +14,6 @@ $headerFont: "Dosis", Sans-Serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-@mixin header-underline {
-  
 }
 
 @mixin button {

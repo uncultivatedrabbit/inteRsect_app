@@ -11,6 +11,12 @@ import SubspecialtyDropdownInput from "../../components/SubspecialtyDropdownInpu
 
 export default class AddProjectPage extends Component {
   static contextType = Context;
+  state = {
+    title: "",
+    summary: "",
+    support_needed: "Let people know what kind of support this project needs",
+    irb_status: "",
+  };
 
   componentDidMount() {
     this.verifyUserLoggedIn();
@@ -29,6 +35,12 @@ export default class AddProjectPage extends Component {
     }
   }
 
+  handleChange = (e, name) => {
+    this.setState({
+      [name]: e.target.value,
+    });
+  };
+
   /**
    * @function handles submit form
    * and sends the project data to the API service
@@ -37,33 +49,27 @@ export default class AddProjectPage extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { id } = this.context.currentUser;
-    const {
-      title,
-      summary,
-      support_needed,
-      dropdown_selection,
-      IRB__Status,
-      subspecialties,
-    } = e.target;
-    if (!subspecialties) {
+    const { title, summary, support_needed, irb_status } = this.state;
+
+    if (!this.context.currentSubSpecialty) {
       ProjectApiService.postProject({
         owner_id: id,
-        title: title.value,
-        summary: summary.value,
-        IrbStatus: IRB__Status.value,
-        specialty: dropdown_selection.value,
+        title,
+        summary,
+        IrbStatus: irb_status,
+        specialty: this.context.currentSpecialty,
         subspecialty: null,
-        support_needed: support_needed.value,
+        support_needed,
       });
     } else {
       ProjectApiService.postProject({
         owner_id: id,
-        title: title.value,
-        summary: summary.value,
-        IrbStatus: IRB__Status.value,
-        specialty: dropdown_selection.value,
-        subspecialty: subspecialties.value,
-        support_needed: support_needed.value,
+        title,
+        summary,
+        IrbStatus: irb_status,
+        specialty: this.context.currentSpecialty,
+        subspecialty: this.context.currentSubspecialty,
+        support_needed,
       });
     }
     this.context.setProjectSubmissionSuccess(true);
@@ -77,9 +83,16 @@ export default class AddProjectPage extends Component {
           <h1>Add New Medical Research Project</h1>
           <form onSubmit={(e) => this.handleSubmit(e)}>
             <label htmlFor="New__Proj__Title">Title*</label>
-            <input type="text" name="title" required id="New__Proj__Title" />
+            <input
+              onChange={(e) => this.handleChange(e, "title")}
+              type="text"
+              name="title"
+              required
+              id="New__Proj__Title"
+            />
             <label htmlFor="New__Proj__Summary">Summary*</label>
             <textarea
+              onChange={(e) => this.handleChange(e, "summary")}
               name="summary"
               required
               defaultValue={""}
@@ -87,18 +100,28 @@ export default class AddProjectPage extends Component {
             />
             <label htmlFor="New__Proj__Support">Support Needed*</label>
             <textarea
+              onChange={(e) => this.handleChange(e, "support_needed")}
               name="support_needed"
               required
-              defaultValue={
-                "Let people know what kind of support this project needs"
-              }
+              defaultValue={this.state.support_needed}
+              onFocus={(e) => {
+                e.target.value =
+                  "" ||
+                  this.state.support_needed !==
+                    "Let people know what kind of support this project needs"
+                    ? this.state.support_needed
+                    : "";
+              }}
               id="New__Proj__Support"
             />
             <label htmlFor="New__Proj__Medical_Specialties">Specialties*</label>
             <DropdownInput required={true} />
             <SubspecialtyDropdownInput />
             <label htmlFor="IRB__Status">IRB Status*</label>
-            <select required name="IRB__Status">
+            <select
+              required
+              onChange={(e) => this.handleChange(e, "irb_status")}
+              name="IRB__Status">
               <option value="">--------</option>
               <option value="Need to Apply">Need to Apply</option>
               <option value="Submitted">Submitted</option>

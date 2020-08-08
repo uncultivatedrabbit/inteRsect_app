@@ -9,6 +9,7 @@ import parseJwt from "../../utils/js/parseJwt";
 import UserApiService from "../../services/user-api-service";
 import SubspecialtyDropdownInput from "../../components/SubspecialtyDropdownInput/SubspecialtyDropdownInput";
 import { Link } from "react-router-dom";
+import HelperFunctions from "../../utils/js/helpers";
 
 export default class SearchPage extends Component {
   // initialize all the possible medical specialties as the global state object
@@ -40,7 +41,7 @@ export default class SearchPage extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const specialty = this.context.currentSpecialty;
+    const specialty = this.context.currentSpecialty || "All";
     let subspecialty = this.context.currentSubspecialty || null;
     if (specialty === "All") {
       ProjectService.getAllProjects().then((results) =>
@@ -66,7 +67,12 @@ export default class SearchPage extends Component {
       return (
         <section key={`${result.title}-${i}`} className="Project__Result">
           <Link to={`/project/${result.id}`}>{result.title}</Link>
-          <p>Primary Researcher: {result.user ? result.user.full_name : ""}</p>
+          <p>
+            Primary Researcher:{" "}
+            {result.owner
+              ? HelperFunctions.capitalCaseName(result.owner.full_name, " ")
+              : ""}
+          </p>
         </section>
       );
     });

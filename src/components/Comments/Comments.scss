@@ -1,4 +1,35 @@
-.Nested__Comments {
-  margin-left: 5em;
+@import '../../utils/scss/variables.scss';
+
+.Comment__Section {
+  h2{
+    text-align: center;
+  }
+  text-align: left;
+  margin-left: 1em;
   margin-top: 1em;
+  
+  .Comment__Owner{
+    color: $mainGrey;
+  }
+  .Comment__Section{
+    padding: 0 1em 1em 1em;
+    border-left: 2px solid $mainGreen;
+    input[type="text"]{
+      display: block;
+    }
+    button, input[type="submit"]{
+      @include button;
+      padding: 0.3em;
+      font-size: 0.7em;
+      letter-spacing: 1px;
+      font-weight: 600;
+      background-color: $mainBlue;
+      border: none;
+      margin-right: 5px;
+      &:hover{
+        cursor: pointer;
+        background-color: $hoverBlue;
+      }
+    }
+  }
 }

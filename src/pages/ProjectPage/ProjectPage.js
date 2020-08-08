@@ -9,6 +9,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import HelperFunctions from "../../utils/js/helpers";
 import Comments from "../../components/Comments/Comments";
 import AddCommentForm from "../../components/AddCommentForm/AddCommentForm";
+import "./ProjectPage.scss";
 
 export default class ProjectPage extends Component {
   state = {
@@ -69,56 +70,68 @@ export default class ProjectPage extends Component {
             <ErrorMessage error={error} />
           ) : (
             <>
-              {currentPage.owner ? (
-                currentPage.owner.id === currentUser.id ? (
-                  <>
-                    <button onClick={() => this.handleEdit(currentPage.id)}>
-                      Edit
-                    </button>
-                    <button onClick={() => this.handleDelete(currentPage.id)}>
-                      Delete
-                    </button>
-                  </>
-                ) : (
-                  ""
-                )
-              ) : (
-                ""
-              )}
-              <h2>{currentPage.title}</h2>
-              <hr className="Header__Underline" />
-              <h3>
-                Principle Investigator:{" "}
-                {currentPage.owner
-                  ? HelperFunctions.capitalCaseName(
-                      currentPage.owner.full_name,
-                      " "
-                    )
-                  : ""}
-              </h3>
-              <p>
-                Internal Review Board Status:{" "}
-                <span className="IRB__Pill">{currentPage.irbstatus}</span>
-              </p>
-              <p>Summary: {currentPage.summary}</p>
-              <p>Support Needed: {currentPage.support_needed}</p>
-              <div className="Comment__Section">
-                {currentPage.owner &&
-                currentPage.owner.id !== currentUser.id ? (
-                  <form>Not My Project</form>
-                ) : (
-                  ""
-                )}
-                <Comments />
+              <header>
                 {currentPage.owner ? (
-                  currentPage.owner.id !== currentUser.id ? (
-                    <AddCommentForm />
+                  currentPage.owner.id === currentUser.id ? (
+                    <div className="Edit__Buttons">
+                      <button onClick={() => this.handleEdit(currentPage.id)}>
+                        Edit
+                      </button>
+                      <button onClick={() => this.handleDelete(currentPage.id)}>
+                        Delete
+                      </button>
+                    </div>
                   ) : (
                     ""
                   )
                 ) : (
                   ""
                 )}
+
+                <h2>{currentPage.title}</h2>
+                <hr className="Header__Underline" />
+              </header>
+              <div className="Main">
+                <h3>
+                  Principle Investigator:{" "}
+                  {currentPage.owner
+                    ? HelperFunctions.capitalCaseName(
+                        currentPage.owner.full_name,
+                        " "
+                      )
+                    : ""}
+                </h3>
+
+                <h3>
+                  <span className="Title">IRB Status: </span>
+                  <span className={`IRB__Pill ${currentPage.irbstatus}`}>
+                    {currentPage.irbstatus}
+                  </span>
+                </h3>
+                <h3>
+                  <span className="Title">Summary</span>
+                </h3>
+                <hr />
+                <p>{currentPage.summary}</p>
+                <h3>
+                  <span className="Title">Support Needed</span>
+                </h3>
+                <hr />
+                <p>{currentPage.support_needed}</p>
+                <div className="Comment__Section">
+                  <h2>Comments</h2>
+                  <hr />
+                  <Comments />
+                  {currentPage.owner ? (
+                    currentPage.owner.id !== currentUser.id ? (
+                      <AddCommentForm />
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
             </>
           )}

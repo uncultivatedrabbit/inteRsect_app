@@ -14,6 +14,10 @@ export default class EditableUserInfo extends Component {
     isBeingEdited: false,
   };
 
+  handleChange(e){
+    
+  }
+
   /**
    * @function keeps track of edited user input
    * and passes that input along to both context in the UI
@@ -54,6 +58,7 @@ export default class EditableUserInfo extends Component {
               {/* uses text area only for bio form */}
               {category === "biography" ? (
                 <textarea
+                  onChange={(e) => this.handleChange(e, "biography")}
                   name="editedInfo"
                   autoFocus
                   defaultValue={defaultValue}
@@ -75,15 +80,21 @@ export default class EditableUserInfo extends Component {
                   <input
                     name="editedInfo"
                     autoFocus
+                    onChange={e => this.handleChange(e, "medical_specialty")}
                     defaultValue={defaultValue}
                     type={category === "email" ? "email" : "text"}
                   />
                 </>
               )}
               <button type="submit">
-                <i id={`${category}-confirm`} className="far fa-check-circle"></i>
+                <i
+                  id={`${category}-confirm`}
+                  className="far fa-check-circle"></i>
               </button>
-              <i id={`${category}-undo`} onClick={this.handleEditMode} className="fas fa-times"></i>
+              <i
+                id={`${category}-undo`}
+                onClick={this.handleEditMode}
+                className="fas fa-times"></i>
             </form>
           </>
         ) : (

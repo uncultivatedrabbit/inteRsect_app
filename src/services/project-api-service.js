@@ -89,8 +89,21 @@ const ProjectApiService = {
       }
     });
   },
-  postProjectComment(projectId, text, submitterId, parentCommentOwnerId) {
-
+  postProjectComment(comment) {
+    return fetch(`${config.API_ENDPOINT}/api/comments`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(comment),
+    }).then((res) => {
+      if (!res.ok) {
+        return res.json().then((e) => Promise.reject(e));
+      } else {
+        return res.json();
+      }
+    });
   },
   deleteProject(projectId) {
     return fetch(`${config.API_ENDPOINT}/api/projects/${projectId}`, {

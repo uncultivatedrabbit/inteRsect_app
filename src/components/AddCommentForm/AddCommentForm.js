@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Context from '../../Context';
+import Context from "../../Context";
 import ProjectApiService from "../../services/project-api-service";
 
 export default class AddCommentForm extends Component {
@@ -15,11 +15,18 @@ export default class AddCommentForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const projectId = this.context.currentPage.id
-    const submitterId = this.context.currentUser.id
+    const projectId = this.context.currentPage.id;
+    const submitterId = this.context.currentUser.id;
     const parentCommentOwnerId = null;
-    const newComment = this.state.comment
-    ProjectApiService.postProjectComment(projectId, newComment, submitterId, parentCommentOwnerId)
+    const newComment = this.state.comment;
+    ProjectApiService.postProjectComment({
+      projectId,
+      newComment,
+      submitterId,
+      parentCommentOwnerId,
+    }).then((data) => {
+      this.context.updateProjectComments(data)
+    });
   }
   render() {
     return (

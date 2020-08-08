@@ -25,7 +25,7 @@ class App extends Component {
     projectSubmissionSuccess: false,
     deleteSuccessful: false,
     error: null,
-    projectComments: '',
+    projectComments: "",
     setError: (error) => this.setState({ error: error }),
     setUser: (data) => this.setState({ currentUser: data }),
     clearUser: () => this.setState({ currentUser: {} }),
@@ -46,6 +46,16 @@ class App extends Component {
         currentUser: {
           ...this.state.currentUser,
           [category]: data,
+        },
+      });
+    },
+    updateProjectComments: (comment) => {
+      this.setState({
+        projectComments: {
+          projectComments: [
+            ...this.state.projectComments.projectComments,
+            comment,
+          ],
         },
       });
     },

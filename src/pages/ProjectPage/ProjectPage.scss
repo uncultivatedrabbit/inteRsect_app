@@ -1,0 +1,64 @@
+@import "../../utils/scss/variables.scss";
+
+.Project__Page {
+  text-align: center;
+  hr {
+    border-color: $mainBlue;
+  }
+  header {
+    padding: 1em;
+    letter-spacing: 1px;
+    background-color: $mainGrey;
+    color: $mainWhite;
+    hr {
+      border-color: $mainWhite;
+    }
+  }
+  .Title {
+    color: $mainBlue;
+    font-weight: 600;
+  }
+  .IRB__Pill {
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    color: $mainWhite;
+    border-radius: 15px;
+    padding: 0.2em 0.3em;
+  }
+  .accepted {
+    background-color: $successGreen;
+  }
+  .exempt{
+    background-color: $mainGrey;
+  }
+  .submitted{
+    background-color: $mainBlue;
+  }
+  .need.to.apply{
+    background-color: $mainRed;
+  }
+  .Edit__Buttons {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      display: block;
+      @include button;
+      border: none;
+      padding: 0.2em;
+      background-color: $mainBlue;
+      margin: 0.5em;
+      &:hover {
+        cursor: pointer;
+        background-color: $hoverBlue;
+      }
+    }
+  }
+  .Main{
+    padding: 0.5em;
+  }
+  .Comment__Section{
+    hr{
+      border-color: $mainDark;
+    }
+  }
+}
